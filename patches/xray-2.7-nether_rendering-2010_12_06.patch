@@ -1,0 +1,739 @@
+This patch adds support for loading Nether worlds in Minecrat X-Ray 2.7.
+This also includes my other patch which fixes some rendering issues.
+
+Index: src/com/plusminus/craft/MineCraftConstants.java
+===================================================================
+RCS file: /usr/local/cvs/xray/src/com/plusminus/craft/MineCraftConstants.java,v
+retrieving revision 1.1
+retrieving revision 1.7
+diff -u -3 -p -r1.1 -r1.7
+--- src/com/plusminus/craft/MineCraftConstants.java	6 Dec 2010 05:28:09 -0000	1.1
++++ src/com/plusminus/craft/MineCraftConstants.java	6 Dec 2010 21:14:51 -0000	1.7
+@@ -31,21 +31,26 @@ public class MineCraftConstants {
+     public static float MOVEMENT_SPEED 		= 10.0f; // world units per second
+     
+     // the font to draw information to the screen
+-    public static final Font ARIALFONT = new Font("Arial", Font.BOLD, 16);
++    public static final Font ARIALFONT = new Font("Arial", Font.BOLD, 14);
+ 	
+     // some convenience statics regarding time calculation
+ 	public static final long NANOSPERSECOND 	= 1000000000;
+ 	public static final long MILLISPERSECOND 	= 1000;
+ 	public static final long NANOSPERMILLIS 	= NANOSPERSECOND / MILLISPERSECOND;
+ 	
++	// TEXTURE_ORES defines the kinds of blocks that we'll highlight.  Note that it's keyed off of the *texture* that we show, not the block type,
++	// which could potentially have some issues if we're showing the same texture for more than one block type (as with wood).
+ 	public static final int TEXTURE_COAL = (2*16) + 2;
+ 	public static final int TEXTURE_IRON = (2*16) + 1;
+ 	public static final int TEXTURE_GOLD = (2*16) + 0;
+ 	public static final int TEXTURE_DIAMOND = (3*16) + 2;
+ 	public static final int TEXTURE_REDSTONE = (3*16) + 3;
+ 	public static final int TEXTURE_SPAWNER = (4*16) + 1;
+-	public static final int[] TEXTURE_ORES = new int[] {TEXTURE_COAL, TEXTURE_IRON, TEXTURE_GOLD, TEXTURE_DIAMOND, TEXTURE_REDSTONE, TEXTURE_SPAWNER};
+-	public static final String[] ORES_DESCRIPTION = new String[] {"Coal", "Iron", "Gold", "Diamond", "Redstone", "Spawner"};
++	public static final int TEXTURE_CLAY = (4*16)+8;
++	public static final int TEXTURE_PUMPKIN = (7*16)+7;
++	public static final int TEXTURE_OBSIDIAN = (2*16)+5;
++	public static final int[] TEXTURE_ORES = new int[] {TEXTURE_CLAY, TEXTURE_PUMPKIN, TEXTURE_OBSIDIAN, TEXTURE_COAL, TEXTURE_IRON, TEXTURE_GOLD, TEXTURE_DIAMOND, TEXTURE_REDSTONE, TEXTURE_SPAWNER};
++	public static final String[] ORES_DESCRIPTION = new String[] {"Clay", "Pumpkin", "Obsidian", "Coal", "Iron", "Gold", "Diamond", "Redstone", "Spawner"};
+ 	
+ 	public static final int TEXTURE_WATER = 207;
+ 	public static final int TEXTURE_TORCH = 5*16;
+@@ -56,6 +61,83 @@ public class MineCraftConstants {
+ 	public static final int TYPE_LAVA_STATIONARY = 11;
+ 	public static final int TYPE_TORCH = 50;
+ 	
++	public static final int BLOCK_STONE = 1;
++	public static final int BLOCK_GRASS = 2;
++	public static final int BLOCK_DIRT = 3;
++	public static final int BLOCK_COBBLESTONE = 4;
++	public static final int BLOCK_WOOD = 5;
++	public static final int BLOCK_SAPLING = 6;
++	public static final int BLOCK_BEDROCK = 7;
++	public static final int BLOCK_WATER = 8;
++	public static final int BLOCK_STATIONARY_WATER = 9;
++	public static final int BLOCK_LAVA = 10;
++	public static final int BLOCK_STATIONARY_LAVA = 11;
++	public static final int BLOCK_SAND = 12;
++	public static final int BLOCK_GRAVEL = 13;
++	public static final int BLOCK_GOLD_ORE = 14;
++	public static final int BLOCK_IRON_ORE = 15;
++	public static final int BLOCK_COAL_ORE = 16;
++	public static final int BLOCK_LOG = 17;
++	public static final int BLOCK_LEAVES = 18;
++	public static final int BLOCK_SPONGE = 19;
++	public static final int BLOCK_GLASS = 20;
++	public static final int BLOCK_GRAY_CLOTH = 35;
++	public static final int BLOCK_YELLOW_FLOWER = 37;
++	public static final int BLOCK_RED_ROSE = 38;
++	public static final int BLOCK_BROWN_MUSHROOM = 39;
++	public static final int BLOCK_RED_MUSHROOM = 40;
++	public static final int BLOCK_GOLD_BLOCK = 41;
++	public static final int BLOCK_IRON_BLOCK = 42;
++	public static final int BLOCK_DOUBLE_STEP = 43;
++	public static final int BLOCK_STEP = 44;
++	public static final int BLOCK_BRICK = 45;
++	public static final int BLOCK_TNT = 46;
++	public static final int BLOCK_BOOKSHELF = 47;
++	public static final int BLOCK_MOSSY_COBBLESTONE = 48;
++	public static final int BLOCK_OBSIDIAN = 49;
++	public static final int BLOCK_TORCH = 50;
++	public static final int BLOCK_FIRE = 51;
++	public static final int BLOCK_MOB_SPAWNER = 52;
++	public static final int BLOCK_WOODEN_STAIRS = 53;
++	public static final int BLOCK_CHEST = 54;
++	public static final int BLOCK_REDSTONE_WIRE = 55;
++	public static final int BLOCK_DIAMOND_ORE = 56;
++	public static final int BLOCK_DIAMOND_BLOCK = 57;
++	public static final int BLOCK_WORKBENCH = 58;
++	public static final int BLOCK_CROPS = 59;
++	public static final int BLOCK_SOIL = 60;
++	public static final int BLOCK_FURNACE = 61;
++	public static final int BLOCK_BURNING_FURNACE = 62;
++	public static final int BLOCK_SIGNPOST = 63;
++	public static final int BLOCK_WOODEN_DOOR = 64;
++	public static final int BLOCK_LADDER = 65;
++	public static final int BLOCK_MINECART_TRACKS = 66;
++	public static final int BLOCK_COBBLESTONE_STAIRS = 67;
++	public static final int BLOCK_WALL_SIGN = 68;
++	public static final int BLOCK_LEVER = 69;
++	public static final int BLOCK_STONE_PRESSURE_PLATE = 70;
++	public static final int BLOCK_IRON_DOOR = 71;
++	public static final int BLOCK_WOODEN_PRESSURE_PLATE = 72;
++	public static final int BLOCK_REDSTONE_ORE = 73;
++	public static final int BLOCK_GLOWING_REDSTONE_ORE = 74;
++	public static final int BLOCK_REDSTONE_TORCH_OFF = 75;
++	public static final int BLOCK_REDSTONE_TORCH_ON = 76;
++	public static final int BLOCK_STONE_BUTTON = 77;
++	public static final int BLOCK_SNOW = 78;
++	public static final int BLOCK_ICE = 79;
++	public static final int BLOCK_SNOW_BLOCK = 80;
++	public static final int BLOCK_CACTUS = 81;
++	public static final int BLOCK_CLAY = 82;
++	public static final int BLOCK_REED = 83;
++	public static final int BLOCK_JUKEBOX = 84;
++	public static final int BLOCK_FENCE = 85;
++	public static final int BLOCK_PUMPKIN = 86;
++	public static final int BLOCK_NETHERSTONE = 87;
++	public static final int BLOCK_SLOW_SAND = 88;
++	public static final int BLOCK_LIGHTSTONE = 89;
++	public static final int BLOCK_PORTAL = 90;
++	public static final int BLOCK_JACK_O_LANTERN = 91;
++	
+ 	public static final Block[] SURROUNDINGBLOCKS = new Block[] { 
+     	new Block(+1,0,0),
+     	new Block(-1,0,0),
+@@ -82,66 +164,65 @@ public class MineCraftConstants {
+ 		}
+ 		
+ 		//blockColors[0] = new Color(255,255,255);
+-		blockColors[1] = new Color(120,120,120);
+-		blockColors[2] = new Color(117,176,73);
+-		blockColors[3] = new Color(134,96,67);
+-		blockColors[4] = new Color(115,115,115);
+-		blockColors[48] = new Color(115,115,115);
+-		blockColors[5] = new  Color(157,128,79);
+-		blockColors[6] = new Color(120,120,120);
+-		blockColors[7] = new Color(84,84,84);
+-		blockColors[8] = new Color(38,92,255);
+-		blockColors[9] = new  Color(38,92,255);
+-		blockColors[10] = new Color(255,90,0);
+-		blockColors[11] = new Color(255,90,0);
+-		blockColors[12] = new Color(218,210,158);
+-		blockColors[13] = new Color(136,126,126);
+-		blockColors[14] = new Color(143,140,125);
+-		blockColors[15] = new Color(136,130,127);
+-		blockColors[16] = new Color(115,115,115);
+-		blockColors[17] = new Color(102,81,51);
+-		blockColors[18] = new Color(60,192,41);
+-		blockColors[20] = new Color(255,255,255); //glass
+-		blockColors[35] = new Color(222,222,222); //Color(143,143,143,255); 
+-		blockColors[38] = new Color(255,0,0);
+-		blockColors[37] = new Color(255,255,0);
+-		blockColors[41] = new Color(231,165,45);
+-		blockColors[42] = new Color(191,191,191);
+-		blockColors[43] = new Color(200,200,200);
+-		blockColors[44] = new Color(200,200,200);
+-		blockColors[45] = new Color(170,86,62);
+-		blockColors[46] = new Color(160,83,65);
+-		blockColors[49] = new Color(26,11,43);
+-		blockColors[50] = new Color(245,220,50);
+-		blockColors[51] = new Color(255,170,30);
+-		//blockColors[52] = Color(245,220,50,255); unnecessary afaik
+-		blockColors[53] = new Color(157,128,79);
+-		blockColors[54] = new Color(125,91,38);
+-		//blockColors[55] = Color(245,220,50,255); unnecessary afaik
+-		blockColors[56] = new Color(129,140,143);
+-		blockColors[57] = new Color(45,166,152);
+-		blockColors[58] = new Color(114,88,56);
+-		blockColors[59] = new Color(146,192,0);
+-		blockColors[60] = new Color(95,58,30);
+-		blockColors[61] = new Color(96,96,96);
+-		blockColors[62] = new Color(96,96,96);
+-		blockColors[63] = new Color(111,91,54);
+-		blockColors[64] = new Color(136,109,67);
+-		blockColors[65] = new Color(181,140,64);
+-		blockColors[66] = new Color(150,134,102);
+-		blockColors[67] = new Color(115,115,115);
+-		blockColors[71] = new Color(191,191,191);
+-		blockColors[73] = new Color(131,107,107);
+-		blockColors[74] = new Color(131,107,107);
+-		blockColors[75] = new Color(181,140,64);
+-		blockColors[76] = new Color(255,0,0);
+-		blockColors[78] = new Color(255,255,255);
+-		blockColors[79] = new Color(83,113,163);
+-		blockColors[80] = new Color(250,250,250);
+-		blockColors[81] = new Color(25,120,25);
+-		blockColors[82] = new Color(151,157,169);
+-		blockColors[83] = new Color(193,234,150);
+-		blockColors[83] = new Color(100,67,50);
++		blockColors[BLOCK_STONE] = new Color(120,120,120);
++		blockColors[BLOCK_GRASS] = new Color(117,176,73);
++		blockColors[BLOCK_DIRT] = new Color(134,96,67);
++		blockColors[BLOCK_COBBLESTONE] = new Color(115,115,115);
++		blockColors[BLOCK_MOSSY_COBBLESTONE] = new Color(115,115,115);
++		blockColors[BLOCK_WOOD] = new  Color(157,128,79);
++		blockColors[BLOCK_SAPLING] = new Color(120,120,120);
++		blockColors[BLOCK_BEDROCK] = new Color(84,84,84);
++		blockColors[BLOCK_WATER] = new Color(38,92,255);
++		blockColors[BLOCK_STATIONARY_WATER] = new  Color(38,92,255);
++		blockColors[BLOCK_LAVA] = new Color(255,90,0);
++		blockColors[BLOCK_STATIONARY_LAVA] = new Color(255,90,0);
++		blockColors[BLOCK_SAND] = new Color(218,210,158);
++		blockColors[BLOCK_GRAVEL] = new Color(136,126,126);
++		blockColors[BLOCK_GOLD_ORE] = new Color(143,140,125);
++		blockColors[BLOCK_IRON_ORE] = new Color(136,130,127);
++		blockColors[BLOCK_COAL_ORE] = new Color(115,115,115);
++		blockColors[BLOCK_LOG] = new Color(102,81,51);
++		blockColors[BLOCK_LEAVES] = new Color(60,192,41);
++		blockColors[BLOCK_GLASS] = new Color(255,255,255); //glass
++		blockColors[BLOCK_GRAY_CLOTH] = new Color(222,222,222); //Color(143,143,143,255); 
++		blockColors[BLOCK_RED_ROSE] = new Color(255,0,0);
++		blockColors[BLOCK_YELLOW_FLOWER] = new Color(255,255,0);
++		blockColors[BLOCK_GOLD_BLOCK] = new Color(231,165,45);
++		blockColors[BLOCK_IRON_BLOCK] = new Color(191,191,191);
++		blockColors[BLOCK_DOUBLE_STEP] = new Color(200,200,200);
++		blockColors[BLOCK_STEP] = new Color(200,200,200);
++		blockColors[BLOCK_BRICK] = new Color(170,86,62);
++		blockColors[BLOCK_TNT] = new Color(160,83,65);
++		blockColors[BLOCK_OBSIDIAN] = new Color(26,11,43);
++		blockColors[BLOCK_TORCH] = new Color(245,220,50);
++		blockColors[BLOCK_FIRE] = new Color(255,170,30);
++		//blockColors[BLOCK_MOB_SPAWNER] = Color(245,220,50,255); unnecessary afaik
++		blockColors[BLOCK_WOODEN_STAIRS] = new Color(157,128,79);
++		blockColors[BLOCK_CHEST] = new Color(125,91,38);
++		//blockColors[BLOCK_REDSTONE_WIRE] = Color(245,220,50,255); unnecessary afaik
++		blockColors[BLOCK_DIAMOND_ORE] = new Color(129,140,143);
++		blockColors[BLOCK_DIAMOND_BLOCK] = new Color(45,166,152);
++		blockColors[BLOCK_WORKBENCH] = new Color(114,88,56);
++		blockColors[BLOCK_CROPS] = new Color(146,192,0);
++		blockColors[BLOCK_SOIL] = new Color(95,58,30);
++		blockColors[BLOCK_FURNACE] = new Color(96,96,96);
++		blockColors[BLOCK_BURNING_FURNACE] = new Color(96,96,96);
++		blockColors[BLOCK_SIGNPOST] = new Color(111,91,54);
++		blockColors[BLOCK_WOODEN_DOOR] = new Color(136,109,67);
++		blockColors[BLOCK_LADDER] = new Color(181,140,64);
++		blockColors[BLOCK_MINECART_TRACKS] = new Color(150,134,102);
++		blockColors[BLOCK_COBBLESTONE_STAIRS] = new Color(115,115,115);
++		blockColors[BLOCK_IRON_DOOR] = new Color(191,191,191);
++		blockColors[BLOCK_REDSTONE_ORE] = new Color(131,107,107);
++		blockColors[BLOCK_GLOWING_REDSTONE_ORE] = new Color(131,107,107);
++		blockColors[BLOCK_REDSTONE_TORCH_OFF] = new Color(181,140,64);
++		blockColors[BLOCK_REDSTONE_TORCH_ON] = new Color(255,0,0);
++		blockColors[BLOCK_SNOW] = new Color(255,255,255);
++		blockColors[BLOCK_ICE] = new Color(83,113,163);
++		blockColors[BLOCK_SNOW_BLOCK] = new Color(250,250,250);
++		blockColors[BLOCK_CACTUS] = new Color(25,120,25);
++		blockColors[BLOCK_CLAY] = new Color(151,157,169);
++		blockColors[BLOCK_REED] = new Color(100,67,50);
+ 	}
+     
+     /***
+@@ -153,64 +234,82 @@ public class MineCraftConstants {
+ 			blockDataToSpriteSheet[i] = -1;
+ 		}
+ 		//blockTrans[0] = -1;
+-		blockDataToSpriteSheet[1] = 1;
+-		blockDataToSpriteSheet[2] = 0;
+-		blockDataToSpriteSheet[3] = 2;
+-		blockDataToSpriteSheet[4] = 16;
+-		blockDataToSpriteSheet[5] = 4;
+-		blockDataToSpriteSheet[6] = 15;
+-		blockDataToSpriteSheet[7] = 49;
+-		blockDataToSpriteSheet[8] = 207;
+-		blockDataToSpriteSheet[9] = 207;
+-		blockDataToSpriteSheet[10] = 239;
+-		blockDataToSpriteSheet[11] = 239;
+-		blockDataToSpriteSheet[12] = 18;
+-		blockDataToSpriteSheet[13] = 19;
+-		blockDataToSpriteSheet[14] = 32;
+-		blockDataToSpriteSheet[15] = 33;
+-		blockDataToSpriteSheet[16] = 34;
+-		blockDataToSpriteSheet[17] = 20;
+-		blockDataToSpriteSheet[18] = 53;
+-		blockDataToSpriteSheet[19] = 52;
+-		blockDataToSpriteSheet[20] = 49;
+-		blockDataToSpriteSheet[37] = 13;
+-		blockDataToSpriteSheet[38] = 12;
+-		blockDataToSpriteSheet[39] = (1*16) + 13;
+-		blockDataToSpriteSheet[40] = (1*16) + 12;
+-		blockDataToSpriteSheet[41] = 23;
+-		blockDataToSpriteSheet[42] = 22;
+-		blockDataToSpriteSheet[43] = 72;
+-		blockDataToSpriteSheet[44] = 72;
+-		blockDataToSpriteSheet[45] = 7;
+-		blockDataToSpriteSheet[46] = 8;
+-		blockDataToSpriteSheet[47] = 35;
+-		blockDataToSpriteSheet[48] = 16;
+-		blockDataToSpriteSheet[49] = 49;
+-		blockDataToSpriteSheet[50] = 80;
+-		blockDataToSpriteSheet[51] = 30;
+-		blockDataToSpriteSheet[52] = 65;
+-		blockDataToSpriteSheet[53] = 55;
+-		blockDataToSpriteSheet[54] = 26;
+-		blockDataToSpriteSheet[55] = 100;
+-		blockDataToSpriteSheet[56] = 50;
+-		blockDataToSpriteSheet[57] = 24;
+-		blockDataToSpriteSheet[58] = 25;
+-		blockDataToSpriteSheet[59] = 12;
+-		blockDataToSpriteSheet[60] = 19;
+-		blockDataToSpriteSheet[61] = 44;
+-		blockDataToSpriteSheet[62] = 44;
+-		//blockDataToSpriteSheet[67] = cobblestone stairs
+-		//blockDataToSpriteSheet[64] = wooden door
+-		// blockDataToSpriteSheet[65] = ladder
+-		//blockDataToSpriteSheet[70] = stone pressure plate
+-		blockDataToSpriteSheet[73] = 51;
+-		blockDataToSpriteSheet[74] = 51;
+-		blockDataToSpriteSheet[78] = 66;
+-		blockDataToSpriteSheet[79] = 67;
+-		blockDataToSpriteSheet[80] = 66;
+-		blockDataToSpriteSheet[81] = 70;
+-		blockDataToSpriteSheet[82] = 87;
+-		blockDataToSpriteSheet[83] = 73;
++		blockDataToSpriteSheet[BLOCK_STONE] = 1;
++		blockDataToSpriteSheet[BLOCK_GRASS] = 0;
++		blockDataToSpriteSheet[BLOCK_DIRT] = 2;
++		blockDataToSpriteSheet[BLOCK_COBBLESTONE] = 16;
++		blockDataToSpriteSheet[BLOCK_WOOD] = 4;
++		blockDataToSpriteSheet[BLOCK_SAPLING] = 15;
++		blockDataToSpriteSheet[BLOCK_BEDROCK] = 17;
++		blockDataToSpriteSheet[BLOCK_WATER] = 207;
++		blockDataToSpriteSheet[BLOCK_STATIONARY_WATER] = 207;
++		blockDataToSpriteSheet[BLOCK_LAVA] = 239;
++		blockDataToSpriteSheet[BLOCK_STATIONARY_LAVA] = 239;
++		blockDataToSpriteSheet[BLOCK_SAND] = 18;
++		blockDataToSpriteSheet[BLOCK_GRAVEL] = 19;
++		blockDataToSpriteSheet[BLOCK_GOLD_ORE] = TEXTURE_GOLD;
++		blockDataToSpriteSheet[BLOCK_IRON_ORE] = TEXTURE_IRON;
++		blockDataToSpriteSheet[BLOCK_COAL_ORE] = TEXTURE_COAL;
++		blockDataToSpriteSheet[BLOCK_LOG] = 20;
++		blockDataToSpriteSheet[BLOCK_LEAVES] = 53;
++		blockDataToSpriteSheet[BLOCK_SPONGE] = 52;
++		blockDataToSpriteSheet[BLOCK_GLASS] = 49;
++		blockDataToSpriteSheet[BLOCK_GRAY_CLOTH] = 64;		
++		blockDataToSpriteSheet[BLOCK_YELLOW_FLOWER] = 13;
++		blockDataToSpriteSheet[BLOCK_RED_ROSE] = 12;
++		blockDataToSpriteSheet[BLOCK_BROWN_MUSHROOM] = (1*16) + 13;
++		blockDataToSpriteSheet[BLOCK_RED_MUSHROOM] = (1*16) + 12;
++		blockDataToSpriteSheet[BLOCK_GOLD_BLOCK] = 23;
++		blockDataToSpriteSheet[BLOCK_IRON_BLOCK] = 22;
++		blockDataToSpriteSheet[BLOCK_DOUBLE_STEP] = 5; // previously 72, which was clay
++		blockDataToSpriteSheet[BLOCK_STEP] = 5; // previously 72, which was clay
++		blockDataToSpriteSheet[BLOCK_BRICK] = 7;
++		blockDataToSpriteSheet[BLOCK_TNT] = 8;
++		blockDataToSpriteSheet[BLOCK_BOOKSHELF] = 35;
++		blockDataToSpriteSheet[BLOCK_MOSSY_COBBLESTONE] = (2*16)+4;
++		blockDataToSpriteSheet[BLOCK_OBSIDIAN] = TEXTURE_OBSIDIAN;
++		blockDataToSpriteSheet[BLOCK_TORCH] = 80;
++		blockDataToSpriteSheet[BLOCK_FIRE] = 16+15;  // previously 30
++		blockDataToSpriteSheet[BLOCK_MOB_SPAWNER] = TEXTURE_SPAWNER;
++		blockDataToSpriteSheet[BLOCK_WOODEN_STAIRS] = 4;  // previously 55
++		blockDataToSpriteSheet[BLOCK_CHEST] = 26;
++		blockDataToSpriteSheet[BLOCK_REDSTONE_WIRE] = 100;
++		blockDataToSpriteSheet[BLOCK_DIAMOND_ORE] = TEXTURE_DIAMOND;
++		blockDataToSpriteSheet[BLOCK_DIAMOND_BLOCK] = 24;
++		blockDataToSpriteSheet[BLOCK_WORKBENCH] = 25;
++		blockDataToSpriteSheet[BLOCK_CROPS] = (5*16)+15;
++		blockDataToSpriteSheet[BLOCK_SOIL] = (5*16)+6;
++		blockDataToSpriteSheet[BLOCK_FURNACE] = 44;
++		blockDataToSpriteSheet[BLOCK_BURNING_FURNACE] = (3*16)+13;
++		blockDataToSpriteSheet[BLOCK_SIGNPOST] = 4;  // perhaps this is best left out actually		
++		blockDataToSpriteSheet[BLOCK_WOODEN_DOOR] = (6*16)+1;
++		blockDataToSpriteSheet[BLOCK_LADDER] = (5*16)+3;
++		blockDataToSpriteSheet[BLOCK_MINECART_TRACKS] = (8*16);
++		blockDataToSpriteSheet[BLOCK_COBBLESTONE_STAIRS] = 16;
++		blockDataToSpriteSheet[BLOCK_WALL_SIGN] = 4;  // perhaps this is best left out actually		
++		//blockDataToSpriteSheet[BLOCK_LEVER] = ;
++	    blockDataToSpriteSheet[BLOCK_STONE_PRESSURE_PLATE] = 6;  // perhaps this is best left out actually
++		blockDataToSpriteSheet[BLOCK_IRON_DOOR] = (6*16)+2;
++		blockDataToSpriteSheet[BLOCK_WOODEN_PRESSURE_PLATE] = 4;  // perhaps this is best left out actually
++		blockDataToSpriteSheet[BLOCK_REDSTONE_ORE] = TEXTURE_REDSTONE;
++		blockDataToSpriteSheet[BLOCK_GLOWING_REDSTONE_ORE] = 51;
++		blockDataToSpriteSheet[BLOCK_REDSTONE_TORCH_OFF] = (7*16)+3;
++		blockDataToSpriteSheet[BLOCK_REDSTONE_TORCH_ON] = (6*16)+3;
++		//blockDataToSpriteSheet[BLOCK_STONE_BUTTON] = ;
++		blockDataToSpriteSheet[BLOCK_SNOW] = 66;
++		blockDataToSpriteSheet[BLOCK_ICE] = 67;
++		blockDataToSpriteSheet[BLOCK_SNOW_BLOCK] = 66;
++		blockDataToSpriteSheet[BLOCK_CACTUS] = 70;
++		blockDataToSpriteSheet[BLOCK_CLAY] = TEXTURE_CLAY;
++		blockDataToSpriteSheet[BLOCK_REED] = 73;
++		blockDataToSpriteSheet[BLOCK_JUKEBOX] = (4*16)+10;
++		blockDataToSpriteSheet[BLOCK_FENCE] = 4;
++		blockDataToSpriteSheet[BLOCK_PUMPKIN] = TEXTURE_PUMPKIN;
++		blockDataToSpriteSheet[BLOCK_NETHERSTONE] = (6*16)+7;
++		blockDataToSpriteSheet[BLOCK_SLOW_SAND] = (6*16)+8;
++		blockDataToSpriteSheet[BLOCK_LIGHTSTONE] = (6*16)+9;
++		blockDataToSpriteSheet[BLOCK_PORTAL] = 16+14;
++		blockDataToSpriteSheet[BLOCK_JACK_O_LANTERN] = (7*16)+8;
+ 	}
+ 	
+ 	/***
+Index: src/com/plusminus/craft/MineCraftEnvironment.java
+===================================================================
+RCS file: /usr/local/cvs/xray/src/com/plusminus/craft/MineCraftEnvironment.java,v
+retrieving revision 1.1
+retrieving revision 1.2
+diff -u -3 -p -r1.1 -r1.2
+--- src/com/plusminus/craft/MineCraftEnvironment.java	6 Dec 2010 05:28:09 -0000	1.1
++++ src/com/plusminus/craft/MineCraftEnvironment.java	6 Dec 2010 21:14:51 -0000	1.2
+@@ -100,9 +100,18 @@ public class MineCraftEnvironment {
+ 	 * @return
+ 	 */
+ 	public static ArrayList<Integer> getAvailableWorlds() {
++		return getAvailableWorlds(false);
++	}
++	
++	/***
++	 * Returns a list of integers corresponding to available worlds
++	 * @param nether
++	 * @return
++	 */
++	public static ArrayList<Integer> getAvailableWorlds(boolean nether) {
+ 		ArrayList<Integer> worlds = new ArrayList<Integer>();
+ 		for(int i=0;i<10;i++) {
+-			File worldDir = getWorldDirectory(i);
++			File worldDir = getWorldDirectory(i, nether);
+ 			if(worldDir.exists() && worldDir.canRead()) {
+ 				worlds.add(i);
+ 			}
+@@ -118,6 +127,18 @@ public class MineCraftEnvironment {
+ 	 * @return
+ 	 */
+ 	public static File getChunkFile(int world, int x, int z) {
++		return getChunkFile(world, x, z, false);
++	}
++	
++	/***
++	 * Returns a file handle to a chunk file in a world
++	 * @param world
++	 * @param x
++	 * @param z
++	 * @param nether
++	 * @return
++	 */
++	public static File getChunkFile(int world, int x, int z, boolean nether) {
+ 		int xx = x % 64;
+ 		if(xx<0) xx = 64+xx;
+ 		int zz = z % 64;
+@@ -125,7 +146,7 @@ public class MineCraftEnvironment {
+ 		String firstFolder 		= Integer.toString(xx, 36);
+ 		String secondFolder 	= Integer.toString(zz, 36);
+ 		String filename 		= "c." + Integer.toString(x, 36) + "." + Integer.toString(z, 36) + ".dat";
+-		return new File(getWorldDirectory(world), firstFolder + "/" + secondFolder + "/" + filename);
++		return new File(getWorldDirectory(world, nether), firstFolder + "/" + secondFolder + "/" + filename);
+ 	}
+ 	
+ 	/***
+@@ -134,7 +155,24 @@ public class MineCraftEnvironment {
+ 	 * @return
+ 	 */
+ 	public static File getWorldDirectory(int world) {
+-		return new File(baseDir, "saves/World" + world);
++		return getWorldDirectory(world, false);
++	}
++	
++	/***
++	 * Returns a file handle to a base world directory
++	 * @param world
++	 * @param nether
++	 * @return
++	 */
++	public static File getWorldDirectory(int world, boolean nether) {
++		if (nether)
++		{
++			return new File(baseDir, "saves/World" + world + "/DIM-1");
++		}
++		else
++		{
++			return new File(baseDir, "saves/World" + world);
++		}
+ 	}
+ 	
+ 	/***
+Index: src/com/plusminus/craft/MinecraftLevel.java
+===================================================================
+RCS file: /usr/local/cvs/xray/src/com/plusminus/craft/MinecraftLevel.java,v
+retrieving revision 1.1
+retrieving revision 1.2
+diff -u -3 -p -r1.1 -r1.2
+--- src/com/plusminus/craft/MinecraftLevel.java	6 Dec 2010 05:28:09 -0000	1.1
++++ src/com/plusminus/craft/MinecraftLevel.java	6 Dec 2010 21:14:51 -0000	1.2
+@@ -31,14 +31,24 @@ public class MinecraftLevel {
+ 	private Block playerPos;
+ 	private float playerYaw;
+ 	private float playerPitch;
+-	
++	private boolean nether;
++
+ 	
+ 	/***
+ 	 * Create a minecraftLevel from the given world
+ 	 * @param world
+ 	 */
+ 	public MinecraftLevel(int world) {
++		this(world, false);
++	}
++	
++	/***
++	 * Create a minecraftLevel from the given world
++	 * @param world
++	 */
++	public MinecraftLevel(int world, boolean nether) {
+ 		this.world = world;
++		this.nether = nether;
+ 		this.levelData = new Chunk[LEVEL_MAX_WIDTH][LEVEL_MAX_HEIGHT];
+ 		File levelFile = new File(MineCraftEnvironment.getWorldDirectory(world), "level.dat");
+ 		
+@@ -50,24 +60,45 @@ public class MinecraftLevel {
+ 		CompoundTag levelDataData = (CompoundTag) levelData.getTagWithName("Data");
+ 		CompoundTag levelPlayerData = (CompoundTag) levelDataData.getTagWithName("Player");
+ 		if(levelPlayerData != null) {
+-			ListTag playerPos = (ListTag) levelPlayerData .getTagWithName("Pos");
+-			ListTag playerRotation = (ListTag) levelPlayerData .getTagWithName("Rotation");
+-	
+-			DoubleTag posX = (DoubleTag) playerPos.value.get(0);
+-			DoubleTag posY = (DoubleTag) playerPos.value.get(1);
+-			DoubleTag posZ = (DoubleTag) playerPos.value.get(2);
+ 			
+-			FloatTag rotYaw = (FloatTag) playerRotation.value.get(0);
+-			FloatTag rotPitch = (FloatTag) playerRotation.value.get(1);
+-			
+-			IntTag spawnX = (IntTag) levelDataData.getTagWithName("SpawnX");
+-			IntTag spawnY = (IntTag) levelDataData.getTagWithName("SpawnY");
+-			IntTag spawnZ = (IntTag) levelDataData.getTagWithName("SpawnZ");
+-			
+-			this.spawnPoint = new Block(-spawnX.value, -spawnY.value, -spawnZ.value);
+-			this.playerPos = new Block((int) -posX.value, (int) -posY.value, (int) -posZ.value);
+-			this.playerYaw = rotYaw.value;
+-			this.playerPitch = rotPitch.value;
++			// Figure out what dimension the player's in.  If it matches, move our camera there.
++			IntTag playerDim = (IntTag) levelPlayerData.getTagWithName("Dimension");
++			if ((playerDim.value == 0 && !nether) || (playerDim.value == -1 && nether))
++			{
++				ListTag playerPos = (ListTag) levelPlayerData .getTagWithName("Pos");
++				ListTag playerRotation = (ListTag) levelPlayerData .getTagWithName("Rotation");
++		
++				DoubleTag posX = (DoubleTag) playerPos.value.get(0);
++				DoubleTag posY = (DoubleTag) playerPos.value.get(1);
++				DoubleTag posZ = (DoubleTag) playerPos.value.get(2);
++				
++				FloatTag rotYaw = (FloatTag) playerRotation.value.get(0);
++				FloatTag rotPitch = (FloatTag) playerRotation.value.get(1);
++
++				this.playerPos = new Block((int) -posX.value, (int) -posY.value, (int) -posZ.value);
++				this.playerYaw = rotYaw.value;
++				this.playerPitch = rotPitch.value;
++
++			}
++			else
++			{
++				this.playerPos = new Block(0,0,0);
++				this.playerYaw =0;
++				this.playerPitch = 0;				
++			}
++	
++			// Set the spawn point if we're not in the Nether
++			if (nether)
++			{
++				this.spawnPoint = new Block(0,0,0);				
++			}
++			else
++			{
++				IntTag spawnX = (IntTag) levelDataData.getTagWithName("SpawnX");
++				IntTag spawnY = (IntTag) levelDataData.getTagWithName("SpawnY");
++				IntTag spawnZ = (IntTag) levelDataData.getTagWithName("SpawnZ");
++				this.spawnPoint = new Block(-spawnX.value, -spawnY.value, -spawnZ.value);
++			}
+ 		} else {
+ 			this.spawnPoint = new Block(0,0,0);
+ 			this.playerPos = new Block(0,0,0);
+@@ -194,7 +225,7 @@ public class MinecraftLevel {
+ 		}
+ 	}
+ 	public Tag loadChunk(int x, int z) {
+-		File chunkFile = MineCraftEnvironment.getChunkFile(world, x,z);
++		File chunkFile = MineCraftEnvironment.getChunkFile(world, x,z, this.nether);
+ 		if(!chunkFile.exists()) {
+ 			return null;
+ 		}
+Index: src/com/plusminus/craft/XRay.java
+===================================================================
+RCS file: /usr/local/cvs/xray/src/com/plusminus/craft/XRay.java,v
+retrieving revision 1.1
+retrieving revision 1.4
+diff -u -3 -p -r1.1 -r1.4
+--- src/com/plusminus/craft/XRay.java	6 Dec 2010 05:28:09 -0000	1.1
++++ src/com/plusminus/craft/XRay.java	6 Dec 2010 21:14:51 -0000	1.4
+@@ -131,6 +131,7 @@ public class XRay {
+ 	
+ 	// the available world numbers
+ 	private ArrayList<Integer> availableWorlds;
++	private ArrayList<Integer> availableNetherWorlds;
+ 	
+ 	// the world chunks we still need to load
+ 	private Stack<Block> mapChunksToLoad;
+@@ -359,6 +360,16 @@ public class XRay {
+ 				
+ 				worldSelectionTextures.add(worldTexture);
+ 			}
++			for(int i : availableNetherWorlds) {
++				Texture worldTexture = TextureTool.allocateTexture(512,32);
++				Graphics2D g = worldTexture.getImage().createGraphics();
++				g.setFont(ARIALFONT);
++				g.setColor(Color.white);
++				g.drawString("World " + i + " Nether", 10, 16);
++				worldTexture.update();
++				
++				worldSelectionTextures.add(worldTexture);
++			}
+ 			
+ 			// mineral textures
+ 			for(int i=0;i<TEXTURE_ORES.length;i++) {
+@@ -491,8 +502,9 @@ public class XRay {
+     	}
+     	
+     	availableWorlds = MineCraftEnvironment.getAvailableWorlds();
++    	availableNetherWorlds = MineCraftEnvironment.getAvailableWorlds(true);
+     	
+-    	if(availableWorlds.size() == 0) {
++    	if(availableWorlds.size() == 0 && availableNetherWorlds.size() == 0) {
+     		JOptionPane.showMessageDialog(null, "Minecraft directory found, but no minecraft levels available.", "Minecraft XRAY error", JOptionPane.ERROR_MESSAGE);
+     		System.exit(0);
+     	}
+@@ -531,17 +543,24 @@ public class XRay {
+     	this.visible_chunk_range = CHUNK_RANGES[n];
+     	this.mapchange_redraw_range = this.visible_chunk_range-2;
+     	this.needToReloadWorld = true;
++    }      
++
++    /***
++     * Sets the world number we want to view
++     * @param worldNum
++     */
++    private void setMinecraftWorld(int worldNum) {
++    	this.setMinecraftWorld(worldNum, false);
+     }
+-      
+- 
+     
+     /***
+      * Sets the world number we want to view
+      * @param worldNum
++     * @param nether
+      */
+-    private void setMinecraftWorld(int worldNum) {
++    private void setMinecraftWorld(int worldNum, boolean nether) {
+     	this.worldNum = worldNum;
+-    	this.level =  new MinecraftLevel(worldNum);
++    	this.level =  new MinecraftLevel(worldNum, nether);
+     	
+     	// determine which chunks are available in this world
+ 		mapChunksToLoad = new Stack<Block>();
+@@ -626,14 +645,16 @@ public class XRay {
+ 	        }
+         } else {
+         	// world selection screen
+-	        if(Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
+-	        	worldSelected = true;
+-	        	this.setMinecraftWorld(availableWorlds.get(worldSelectIndex));
+-	        }
+-	        if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
++	        if(Keyboard.isKeyDown(Keyboard.KEY_RETURN) || Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+ 	        	worldSelected = true;
+-	        	worldNum = availableWorlds.get(worldSelectIndex);
+-	        	this.setMinecraftWorld(availableWorlds.get(worldSelectIndex));
++	        	if (worldSelectIndex > availableWorlds.size()-1)
++	        	{
++	        		this.setMinecraftWorld(availableNetherWorlds.get(worldSelectIndex - availableWorlds.size()), true);
++	        	}
++	        	else
++	        	{
++	        		this.setMinecraftWorld(availableWorlds.get(worldSelectIndex));
++	        	}
+ 	        }
+ 	        if (Keyboard.isKeyDown(Keyboard.KEY_W) && keyPressed != Keyboard.KEY_W)//move forward
+ 	        {
+@@ -654,7 +675,7 @@ public class XRay {
+ 	        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN) && keyPressed != Keyboard.KEY_DOWN)//move backwards
+ 	        {
+ 	        	keyPressed = Keyboard.KEY_DOWN;
+-	        	if(worldSelectIndex < availableWorlds.size()-1) worldSelectIndex++;
++	        	if(worldSelectIndex < availableWorlds.size()+availableNetherWorlds.size()-1) worldSelectIndex++;
+ 	        }
+         }
+         if(!loading) {
+@@ -1100,16 +1121,29 @@ public class XRay {
+ 	 * Draw the mineral toggles
+ 	 */
+ 	private void drawMineralToggle() {
+-		float barWidth = 128+10+32;
+-		float mineralTogglebarLength = mineralToggleTextures.length * barWidth;
+-		float startX = (screenWidth / 2.0f) - (mineralTogglebarLength/2.0f);
++		int barWidth = 128+10+32;
++		int barHeight = 42;
++		int maxCols = 5;
++		float mineralTogglebarLength = (mineralToggleTextures.length % maxCols) * barWidth;
++		float curX = (screenWidth / 2.0f) - (mineralTogglebarLength/2.0f);
++		float curY = screenHeight - barHeight;
++		if (mineralToggleTextures.length > maxCols)
++		{
++			curY -= barHeight;
++		}
+ 		
+ 		for(int i=0;i<mineralToggleTextures.length;i++) {
++			if (i == mineralToggleTextures.length - maxCols)
++			{
++				mineralTogglebarLength = maxCols * barWidth;
++				curY += barHeight;
++				curX = (screenWidth / 2.0f) - (mineralTogglebarLength/2.0f);
++			}
+ 			if(mineralToggle[i]) {
+ 				GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+ 				GL11.glDisable(GL11.GL_TEXTURE_2D);
+ 				SpriteTool.drawCurrentSprite(
+-						startX + (barWidth*i) - 2, screenHeight-42 -2, 
++						curX - 2, curY -2, 
+ 						36, 36, 
+ 						MineCraftConstants.precalcSpriteSheetToTextureX[TEXTURE_ORES[i]], 
+ 						MineCraftConstants.precalcSpriteSheetToTextureY[TEXTURE_ORES[i]],
+@@ -1122,7 +1156,7 @@ public class XRay {
+ 			}
+ 			minecraftTexture.bind();
+ 			SpriteTool.drawCurrentSprite(
+-					startX + (barWidth*i), screenHeight-42, 
++					curX, curY, 
+ 					32, 32, 
+ 					MineCraftConstants.precalcSpriteSheetToTextureX[TEXTURE_ORES[i]], 
+ 					MineCraftConstants.precalcSpriteSheetToTextureY[TEXTURE_ORES[i]],
+@@ -1130,7 +1164,8 @@ public class XRay {
+ 					MineCraftConstants.precalcSpriteSheetToTextureY[TEXTURE_ORES[i]]+TEX16
+ 			);
+ 			
+-			SpriteTool.drawSpriteAbsoluteXY(mineralToggleTextures[i], startX + (barWidth*i) + 32 + 10, screenHeight-35);
++			SpriteTool.drawSpriteAbsoluteXY(mineralToggleTextures[i], curX + 32 + 10, curY+7);
++			curX += barWidth;
+ 		}
+ 	}
+ 	/***

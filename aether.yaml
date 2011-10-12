@@ -1,0 +1,88 @@
+---
+# Aethermod
+#
+# Work-in-progress; this only includes the block information that was given at
+# http://www.minecraftforum.net/topic/112286-/page__view__findpost__p__6833261
+#
+name: Aethermod
+texpath: aether/blocks
+mlblocks:
+
+   - id: 170
+     idStr: ICESTONE
+     name: Icestone
+     mapcolor: [255, 255, 255]
+     tex: Icestone.png
+
+   - id: 171
+     idStr: AERCLOUD
+     name: Aercloud
+     mapcolor: [255, 255, 255]
+     tex: Aercloud.png
+     type: SEMISOLID
+
+   - id: 172
+     idStr: AEROGEL
+     name: Aerogel
+     mapcolor: [255, 255, 255]
+     tex: Aerogel.png
+
+   - id: 173
+     idStr: ENCHANTER
+     name: Enchanter
+     mapcolor: [255, 255, 255]
+     tex: EnchanterSide.png
+     tex_direction:
+       TOP: EnchanterTop.png
+       BOTTOM: EnchanterTop.png
+
+   - id: 174
+     idStr: INCUBATOR
+     name: Incubator
+     mapcolor: [255, 255, 255]
+     tex: IncubatorSide.png
+     tex_direction:
+       TOP: IncubatorTop.png
+       BOTTOM: IncubatorTop.png
+
+   - id: 175
+     idStr: SKYROOT_LOG
+     name: Skyroot Log
+     mapcolor: [255, 255, 255]
+     tex: SkyrootLogSide.png
+     tex_direction:
+       TOP: SkyrootLogTop.png
+       BOTTOM: SkyrootLogTop.png
+
+   - id: 176
+     idStr: SKYROOT_PLANK
+     name: Skyroot Plank
+     mapcolor: [255, 255, 255]
+     tex: Plank.png
+
+   - id: 177
+     idStr: SKYROOT_LEAVES
+     name: Skyroot Leaves
+     mapcolor: [255, 255, 255]
+     tex: SkyrootLeaves.png
+
+   - id: 178
+     idStr: GOLDENOAK_LEAVES
+     name: Golden Oak Leaves
+     mapcolor: [255, 255, 255]
+     tex: GoldenOakLeaves.png
+
+   - id: 179
+     idStr: SKYROOT_SAPLING
+     name: Skyroot Sapling
+     mapcolor: [255, 255, 255]
+     tex: SkyrootSapling.png
+     type: DECORATION_CROSS
+
+   - id: 180
+     idStr: GOLDENOAK_SAPLING
+     name: Golden Oak Sapling
+     mapcolor: [255, 255, 255]
+     tex: GoldenOakSapling.png
+     type: DECORATION_CROSS
+...

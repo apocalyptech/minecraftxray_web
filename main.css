@@ -1,0 +1,113 @@
+BODY {
+	font-family: Arial, Helvetica, sans-serif;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+a {
+    color: #2a2;
+}
+a:visited {
+    color: #151;
+}
+a:hover {
+    color: #3c3;
+}
+
+h2 {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.header {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-bottom: 2px solid silver;
+}
+pre {
+	background-color: #f2f2f2;
+	margin-left: 2em;
+	margin-right: 2em;
+	padding: 5px;
+	border: 1px solid silver;
+}
+.preblock {
+	background-color: #eee;
+	margin-left: 2em;
+	margin-right: 2em;
+	padding: 5px;
+	border: 1px solid silver;
+}
+.indent {
+	margin-left: 3em;
+}
+table {
+	margin-left: 2em;
+}
+dt {
+    font-size: 13pt;
+    font-weight: bold;
+    margin-bottom: .4em;
+    border-bottom: 1px solid silver;
+}
+dd {
+    margin-bottom: 1em;
+}
+.good {
+	color: green;
+}
+.ok {
+	color: olive;
+}
+.bad {
+	color: red;
+}
+.unknown {
+	color: gray;
+}
+.link {
+	text-decoration: underline;
+	font-size: 0.70em;
+	cursor: pointer;
+}
+.mediumblock {
+	font-size: 0.80em;
+	margin-left: 2em;
+	padding-top: 3px;
+}
+.smalltext {
+	font-size: 0.70em;
+}
+.clickable {
+	cursor: pointer;
+}
+.toptable tr td {
+    vertical-align: top;
+    margin-left: .2em;
+    padding-left: .5em;
+}
+.section {
+    font-weight: bold;
+    font-size: 13pt;
+    padding-right: .3em;
+    padding-left: .3em;
+}
+.navigation {
+    margin-left: 2em;
+}
+.resourcelist {
+    margin-left: 3em;
+}
+.resourcelist tr td {
+    padding-left: 2em;
+    vertical-align: top;
+}
+
+.screenshots tr td {
+    padding: .7em;
+    text-align: center;
+    font-style: italic;
+}
+
+.screenshots tr td img {
+    padding-bottom: .3em;
+}

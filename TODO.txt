@@ -1,0 +1,63 @@
+ * Figure out transparency rendering glitches, and start using the
+   transparent leaf texture for trees once that's been figured out.  Right
+   now they look better with the solid texture.  In particular, all the
+   "decorative" blocks like torches, flowers, reed, etc, look weird, as
+   does water and portals.  As it turns out, this is all to do with OpenGL
+   alpha blending; in addition to a couple quick calls to glDepthMask (see
+   renderSolid() in Chunk.java), we then need to make sure that all GL
+   objects are rendered from far-away to near, which will take some doing.
+   
+ * Proper rendering support for redstone wire
+ 
+ * Draw messages on signs like you'd expect.
+ 
+ * GUI to set custom key bindings and custom ore highlights
+ 
+ * Find a way to eliminate the stuttering when new map chunks are loading
+ 
+ * Home/End will wipe the minimap and load chunks, even if we're already
+   "in range" and might even have those chunks cached.  Should fix that.
+   
+ * Minimap effective size has been cut quite a bit, would like to increase that
+ 
+ * Would be nice to have a check when warping between Nether and Overworld
+   to make sure you don't end up off-map
+   
+ * There are various conditions where the player position and spawn position
+   markers won't show up properly on the minimap; should fix those.
+ 
+ * As I've been editing the X-Ray code, I've been using underscore_variables like
+   that, mostly, instead of the camelCase which was more prevalent.  Should really
+   reformat everything to a single style (and retab the whole thing, and clean up
+   formatting and style in general).  And really, I've been pretty lazy all around
+   with doing things the "right way."  The code could use cleanup in general.  Also
+   I think most of the files are still using DOS line-endings.
+ 
+ * Hotkey to re-open the "Open" dialog and load a new world
+ 
+ * And, of course, completing the mod support - UI to select extra mod files, etc.
+   "override" to explicitly override a previously-defined blocktype (this is
+   technically in there already but completely untested), "version" so that people
+   could override the builtin blockdef more efficiently, if they want, etc...
+ 
+ * Technically the minimap colors for a few block types should vary based on the
+   data value.
+ 
+ * There's attributes in BlockType which use ArrayList, and I think I'd rather they
+   just be arrays.  Should look into that.
+ 
+ * Pull the grass colorization color from a point on misc/grasscolor.png
+
+ * Snow has data, as it turns out...
+
+ * Figure out why loading in nonexistant chunks seems to glitch the app so much
+
+ * Update position information popup in realtime rather than after a delay
+ 
+ * The resolution-picking dialog has some issues in Java7.  One, the dropdowns
+   seem very sluggish, whereas on previous JDKs they're quite fast.  Two (and
+   possibly relatedly), our hotkeys (enter and escape) only work so long as the
+   dialog has NEVER actually had the mouse pointer focused on top of it, at
+   least on my WM.  This could potentially have something to do with my
+   focus-follows-mouse type setup, but it works totally fine in both Java5 and
+   Java6, so...

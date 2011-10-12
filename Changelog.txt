@@ -1,0 +1,283 @@
+Minecraft X-Ray 3.4.0 (2011.10.11)
+
+  * New Functions:
+    * The "C" key will toggle the new-style fence connection rendering,
+      introduced in Beta 1.9-pre2
+    * The "V" key will toggle Silverfish block highlighting on/off
+    * The "U" key will toggle the rendering of chunk borders
+    * Slime-spawning chunks can be highlighted with the "M" key.
+    * "Y" will bring up a window with a keyboard reference
+
+  * Rendering Improvements:
+    * Support for the new Beta 1.9-pre3 blocks
+    * Highlighting on solid blocks so they look more three-dimensional
+    * Stems now connect to neighboring fruit properly
+    * Slight improvements to fence and fence gate rendering accuracy
+    * Fixed an issue with grass colorization on some texturepacks
+    * Block and chunk information in the positioning popup are now
+      slightly more accurate.
+    * Farmland block tweaked slightly
+    * Tweaked ore highlighting to be more noticeable
+    * Tweaked coloring for vines, stems, tall grass, and lilypads
+    * Explored highlighting will now key off of redstone torches,
+      Glowstone, and Jack-O-Lanterns, in addition to regular torches
+    * By default, silverfish blocks are highlighted in red.
+    * Reverted back to having "open space" at the edges of the map,
+      instead of a large wall
+
+  * Internal Changes:
+    * Added "texfile" entry in block definition YAML, to support mods
+      which use an entire new sheet of textures
+    * Updated to LWJGL 2.8.0
+    * Use log4j for file logging and console error reporting
+    * Silverfish block ID changed from STONE_SILVERFISH to SILVERFISH
+    * Bundle a third-party texture pack to fall back on if minecraft.jar
+      isn't found.  Using "Faithful 32x32" by Vattic currently.
+      http://www.minecraftforum.net/topic/72747-
+    * More visible notifications when settings in xray.properties get
+      overwritten with defaults
+
+Minecraft X-Ray 3.3.3 (2011.09.23)
+
+  * Support for all Beta 1.9-pre1 blocks
+  * Various rendering improvements to water, glass, glass panes, iron
+    bars, fence gates, crops, and slabs (though transparency issues do
+	continue to persist)
+
+Minecraft X-Ray 3.3.2 (2011.09.20)
+
+  * Chests render more correctly now
+  * Updated Silverfish block to process its data values correctly
+  * Fixed an Exception some Windows users were reporting, when choosing
+    "Other" from the world selection dialog
+
+Minecraft X-Ray 3.3.1 (2011.09.14)
+
+  * Updated OS detection to be far more accepting (specifically for
+    Windows Server 2008, but should be relatively future-proof now)
+
+Minecraft X-Ray 3.3.0 (2011.09.12)
+
+  * Removed redundant information from world selection dialog
+  * Added support for opening arbitrary dimensions (for mods right now,
+    will also be needed for the eventual official Sky Dimension).  "N"
+    now jumps to the next dimension, "P" jumps to the previous.
+  * Internal support for block IDs > 127 (for mods, primarily)
+  * Blocks which orient differently based on direction will default to
+    North now, if we see data values we don't understand
+  * Extra block definitions can be loaded from user-supplied YAML files
+  * Unknown blocks will show up purple in the minimap
+  * Improvements to the rendering of cacti and fences
+  * All new Beta 1.8 blocks supported
+  * (internal) Updated to LWJGL 2.7.1
+  * Reorganization of how X-Ray gets packaged for distribution
+  * Map edges show as large walls instead of open space
+
+Minecraft X-Ray 3.2.2 (2011.09.05)
+
+  * Repackaged due to apparent data corruption in jinput.jar
+    Checksums of good jinput.jar:
+        md5sum: d62ff8cd9539a32dac094c00e820e9e6
+        sha1sum: 2d5a40f2a25f8b4ec1ea35f3e5ca79119ed5d027
+    Checksums of bad jinput.jar:
+        md5sum: bfdffede315be2fcbad6d9df631d18d8
+        sha1sum: 69daa7178d22bc371433678a845231e96d760cd6
+
+Minecraft X-Ray 3.2.1 (2011.08.18)
+
+  * Some mods appear to get rid of misc/water.png, which occasionally
+    causes problems.  Updated to generate our own if needed.
+
+Minecraft X-Ray 3.2.0 (2011.07.01)
+
+  * Support for new Beta 1.7 block - Pistons
+  * Better rendering for beds, cakes, furnaces, dispensers, pumpkins,
+    jack-o-lanterns, chests, workbenches, jukeboxes, TNT, wood,
+	bookshelves, grass, and sandstone
+  * Tweaked grass/leaf color a bit
+  * Toggle between new and old grass rendering with the "G" key
+  * "Other" dialog will now let you choose level.dat, in addition to
+    just choosing the directory
+
+Minecraft X-Ray 3.1.1 (2011.06.22)
+
+  * Support mod installations (such as TooManyItems on OSX) which replace
+    minecraft.jar with a directory
+
+Minecraft X-Ray 3.1.0 (2011.05.26)
+
+  * Update with new Beta 1.6 blocks (trapdoors, tall grass, shrubs)
+  * (internal) Changed how we generate the Portal texture
+
+Minecraft X-Ray 3.0.1 (2011.04.24)
+
+  * Fix torch rendering for non-default texture packs, under some
+    circumstances.
+  * Fix a potential Exception for people running mods like More
+    Block IDs
+
+Minecraft X-Ray 3.0.0 (2011.04.21)
+
+  * Render the appropriate sapling sprite 100% of the time
+  * Show a purple box for unknown blocks, rather than empty space
+  * Fixed the disappearing Render Details window when toggling between
+    Nether and back
+  * Handle invalid level.dat files more gracefully
+  * Render mushrooms, flowers, and sugarcane as a "cross," more like
+    it's done in Minecraft itself
+  * Switched Stone Pressure Plate and Stone Button textures to use
+    the actually-correct one
+  * Make the minimap slightly more useful in the Nether
+  * Handle an exception when the "saves" directory doesn't exist
+  * Show exceptions in a GUI window rather than on the console
+  * Added web blocks, on the offchance that they'll be permanent
+  * Switched to launch4j to build the Windows EXE, which will let
+    64-bit Windows users use it.
+
+Minecraft X-Ray 2.7 Maintenance Branch 12 (2011.04.19)
+
+  * Minor improvements to OSX and Linux script launchers
+  * Added support for powered and detector rails
+  * Added support for birch and spruce saplings
+  * Glass and mob spawners render a bit better
+
+Minecraft X-Ray 2.7 Maintenance Branch 11 (2011.03.16)
+
+  * Fix to be not so picky about colorizing grass
+  * Fix which prevents a crash while in Explored Highlighting mode
+  * Fix Sapling rendering (also a crash)
+  * Override texture data for X-Ray will be read from the
+    .minecraft_xray/textures directory now
+
+Minecraft X-Ray 2.7 Maintenance Branch 10 (2011.03.15)
+
+  * Added Invert Mouse option to startup dialog
+  * Some changes to compile versus Java 1.5 instead of 1.6, for PPC OSX
+    users
+  * Added a dialog to jump directly to a position, with a default key of J
+  * Enter/Esc will do what you'd expect on the startup dialog
+  * World list on the startup dialog is now scrollable
+  * A startup warning was added for Windows systems about possible region
+    corruption if X-Ray is run at the same time as Minecraft.  (I haven't
+    heard reports of this yet, but given the way Windows locks files, it
+    could potentially be an issue.)
+  * Application settings state is remembered inbetween runs
+  * A new Reload action will re-read the map from disk, with a default
+    key of "="
+  * Greatly improved torch and lever rendering
+
+Minecraft X-Ray 2.7 Maintenance Branch 9 (2011.02.22)
+
+  * Snow will render more properly (as a thin slice) now
+  * Ice is now considered water, and won't cause you to see through terrain
+    if it's right up against the ground
+  * Player spawnpoints/locations were off by 1 on the Z axis; fixed that
+  * Support for Beta 1.3 Region format for chunk storage
+  * (internal) changed class name to com.apocalyptech.minecraft.xray
+  * Ignore blocks generated by the More Block IDs mod, rather than dying
+  * Fixed Minecraft data directory detection on a corner case (possibly
+    just for people using the Administrator account in XP)
+  * Resolution dialog will show any valid world directory inside the
+    "saves" dir, instead of just those of the form WorldN
+  * Updated redstone rendering for Minecraft Beta 1.3 (redstone still
+    doesn't actually "link up" though)
+  * Support for Beta 1.3 additions: extra slab blocks, beds, redstone
+    repeaters, and the BurningSkull painting
+  * Fixed and added various wrong/missing minimap colors
+
+Minecraft X-Ray 2.7 Maintenance Branch 8 (2011.01.26)
+
+  * Removed useless "antialiasing" option on startup dialog
+  * Startup dialog will remember your previously-chosen options
+  * Water rendering can be toggled with "T"
+  * Camera can be locked onto the Y axis with "L"
+  * Water and fire should render properly regardless of texture pack
+  * Fixed a bug where changes to the draw distance wouldn't get
+    updated if ore highlighting was turned off
+  * Ore highlights can be specified in the properties file now
+  * Multiplayer camera presets are now sorted by username
+  * Highlight (in green) areas near torches with "E"
+  * Updated texture info for Jukeboxes and Workbenches
+  * Manually throttle back FPS when we don't have focus, or are offscreen
+  * Rendering status information added, toggled with "R" (on by default)
+  * Officially set license to New/Modified BSD License
+
+Minecraft X-Ray 2.7 Maintenance Branch 7 (2011.01.21)
+
+  * Key mappings are now taken from a config file which will get
+    generated automatically with the defaults if not present.
+  * Generate a tbz2 file for Linux/OSX folks
+
+Minecraft X-Ray 2.7 Maintenance Branch 6 (2011.01.19)
+
+  * Fixed a bug where wool and wood wouldn't be considered solid blocks
+  * Ability to warp to any player's position with INS/DEL when loading
+    multiplayer worlds
+  * Minecart tracks, paintings and fences render properly now
+  * Fixed a NullPointerException related to dyed wool
+
+Minecraft X-Ray 2.7 Maintenance Branch 5 (2011.01.17)
+
+  * Generate Windows EXE via JSmooth
+  * Fixed a bug that was keeping chunk files open
+  * Load chunks on-demand rather than at program start
+  * X-Ray should now handle any map, regardless of size
+  * Handle corrupt/invalid chunks more gracefully
+  * Changed default starting memory from 128MB to 256MB
+  * World selection merged in with main options dialog
+  * Ability to select arbitrary directories to open worlds
+  * "N" key will toggle back and forth between Nether and Overworld, if available.
+  * Minimap rotated so that north points up (previously it had pointed left)
+  * Added Y position to position popup
+  * Added support for new Beta 1.2 Blocks
+  * Added Lapis Lazuli to highlightable ore list
+  * Fullscreen toggle changed to Backspace
+
+Minecraft X-Ray 2.7 Maintenance Branch 4 (2010.12.16)
+
+  * Camera speed can be controlled by the left and right mouse buttons,
+    in addition to left and right shift.
+  * "Fast" camera speed has been given another 50% speed boost
+  * (internal) Add in Ant build.xml to automate releasing
+  * (internal) Ore highlights are specified by block type, not texture type
+  * The following render more-correctly: redstone torches, redstone wire,
+    crops, mushrooms, flowers, planted saplings, reeds, ladders, sponges,
+    minecart tracks, pressure plates, half-height steps, doors, stairs,
+    signs (though without the message), fences (though we make no effort
+    to try and chain them together; all fence pieces will be oriented the
+    same way), levers, buttons, portals.
+  * Fixed an issue loading worlds which don't yet include the "Dimension" tag
+  * Increased default chunk-highlighting range
+  * Should correctly colorize grass if needed, using any texture pack.
+  * Uses the same texture pack Minecraft uses, if set in Minecraft's "Mods and
+    Texture Packs" menu.
+  * Resolution dialog will show 1280x1024, 1024x768, and 800x600, regardless of
+    whether or not those resolutions were auto-detected
+  
+Minecraft X-Ray 2.7 Maintenance Branch 3 (2010.12.08)
+
+  * Initial level loading should be much faster now
+  * "B" key will toggle the bedrock layer on/off
+  * Right-Shift will SLOW the camera motion (contrary to Left-Shift, which
+    still speeds it up)
+  * Texture packs higher than 16x16 texture size should show up correctly
+    again.
+
+Minecraft X-Ray 2.7 Maintenance Branch 2 (2010.12.07)
+
+  * "Fullbright" toggle is now triggered with the "F" key
+  * Ore highlight toggle works again, and is triggered with the "H" key
+
+Minecraft X-Ray 2.7 Maintenance Branch 1 (2010.12.06)
+
+  * Grass and Leaves appear green again (though they don't show biome-
+    specific coloring)
+  * Many previously-broken blocks now show up correctly
+  * Nether worlds are selectable
+  * "Esc" will let go of the mouse instead of exiting; click to re-grab.
+  * Windowed mode by default
+  * Ctrl-Q will quit
+  * The numbers 1 through 7 will control how far out the app will highlight
+    the specified resources.  The default is much closer than it had been
+    previously.
+  * Clay, Obsidian, and Pumpkins are now highlightable
