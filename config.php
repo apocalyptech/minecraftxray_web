@@ -3,8 +3,6 @@ require_once('func.php');
 xray_header();
 
 $resources = array(
-    'AIR_PORTAL',
-    'AIR_PORTAL_FRAME',
     'BED',
     'BEDROCK',
     'BOOKSHELF',
@@ -30,6 +28,9 @@ $resources = array(
     'DISPENSER',
     'DOUBLE_SLAB',
     'ENCHANTMENT_TABLE',
+    'ENDER_PORTAL',
+    'ENDER_PORTAL_FRAME',
+    'ENDER_STONE',
     'FARMLAND',
     'FENCE',
     'FENCE_GATE',

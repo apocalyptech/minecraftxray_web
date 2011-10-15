@@ -70,33 +70,34 @@ But without the "KEY_" prefix.
 You can also set which resources you want to be highlightable in the app.
 For specifying resource highlights, you should use the following names:
 
-    AIR_PORTAL              HUGE_BROWN_MUSHROOM      REDSTONE_TORCH_OFF
-    AIR_PORTAL_FRAME        HUGE_RED_MUSHROOM        REDSTONE_TORCH_ON
-    BED                     ICE                      REDSTONE_WIRE
-    BEDROCK                 IRON_BARS                RED_MUSHROOM
-    BOOKSHELF               IRON_BLOCK               RED_ROSE
-    BREWING_STAND           IRON_DOOR                SAND
-    BRICK                   IRON_ORE                 SANDSTONE
-    BRICK_STAIRS            JACK_O_LANTERN           SAPLING
-    BROWN_MUSHROOM          JUKEBOX                  SIGNPOST
-    BURNING_FURNACE         LADDER                   SILVERFISH
-    CACTUS                  LAPIS_LAZULI_BLOCK       SLAB
-    CAKE                    LAPIS_LAZULI_ORE         SNOW
-    CAULDRON                LAVA                     SNOW_BLOCK
-    CHEST                   LEAVES                   SOUL_SAND
-    CLAY                    LEVER                    SPONGE
-    COAL_ORE                LILY_PAD                 STATIONARY_LAVA
-    COBBLESTONE             MELON                    STATIONARY_WATER
-    COBBLESTONE_STAIRS      MELON_STEM               STONE
-    CROPS                   MINECART_TRACKS          STONE_BRICK
-    DEAD_SHRUB              MOB_SPAWNER              STONE_BRICK_STAIRS
-    DETECTOR_RAIL           MOSSY_COBBLESTONE        STONE_BUTTON
-    DIAMOND_BLOCK           MYCELIUM                 STONE_PRESSURE_PLATE
-    DIAMOND_ORE             NETHER_BRICK             SUGARCANE
-    DIRT                    NETHER_FENCE             TALL_GRASS
-    DISPENSER               NETHER_STAIRS            TNT
-    DOUBLE_SLAB             NETHER_WART              TORCH
-    ENCHANTMENT_TABLE       NETHERRACK               TRAPDOOR
+    BED                     GRAVEL                   REDSTONE_REPEATER_ON
+    BEDROCK                 HUGE_BROWN_MUSHROOM      REDSTONE_TORCH_OFF
+    BOOKSHELF               HUGE_RED_MUSHROOM        REDSTONE_TORCH_ON
+    BREWING_STAND           ICE                      REDSTONE_WIRE
+    BRICK                   IRON_BARS                RED_MUSHROOM
+    BRICK_STAIRS            IRON_BLOCK               RED_ROSE
+    BROWN_MUSHROOM          IRON_DOOR                SAND
+    BURNING_FURNACE         IRON_ORE                 SANDSTONE
+    CACTUS                  JACK_O_LANTERN           SAPLING
+    CAKE                    JUKEBOX                  SIGNPOST
+    CAULDRON                LADDER                   SILVERFISH
+    CHEST                   LAPIS_LAZULI_BLOCK       SLAB
+    CLAY                    LAPIS_LAZULI_ORE         SNOW
+    COAL_ORE                LAVA                     SNOW_BLOCK
+    COBBLESTONE             LEAVES                   SOUL_SAND
+    COBBLESTONE_STAIRS      LEVER                    SPONGE
+    CROPS                   LILY_PAD                 STATIONARY_LAVA
+    DEAD_SHRUB              MELON                    STATIONARY_WATER
+    DETECTOR_RAIL           MELON_STEM               STONE
+    DIAMOND_BLOCK           MINECART_TRACKS          STONE_BRICK
+    DIAMOND_ORE             MOB_SPAWNER              STONE_BRICK_STAIRS
+    DIRT                    MOSSY_COBBLESTONE        STONE_BUTTON
+    DISPENSER               MYCELIUM                 STONE_PRESSURE_PLATE
+    DOUBLE_SLAB             NETHER_BRICK             SUGARCANE
+    ENCHANTMENT_TABLE       NETHER_FENCE             TALL_GRASS
+    ENDER_PORTAL            NETHER_STAIRS            TNT
+    ENDER_PORTAL_FRAME      NETHER_WART              TORCH
+    ENDER_STONE             NETHERRACK               TRAPDOOR
     FARMLAND                NOTE_BLOCK               VINE
     FENCE                   OBSIDIAN                 WALL_SIGN
     FENCE_GATE              PISTON_BODY              WATER
@@ -109,7 +110,6 @@ For specifying resource highlights, you should use the following names:
     GOLD_BLOCK              PUMPKIN_STEM             WORKBENCH
     GOLD_ORE                REDSTONE_ORE             YELLOW_FLOWER
     GRASS                   REDSTONE_REPEATER_OFF
-    GRAVEL                  REDSTONE_REPEATER_ON
 
 Perhaps someday there'll be an actual GUI for specifying all this.
 
@@ -191,10 +191,9 @@ file it finds in the blockdefs directory, and it will display which ones
 it was able to load on the opening dialog.  If your file doesn't show up
 in the list, there's probably an error in it - you should be able to
 find that error in the file minecraft_xray_output_log.txt in the root
-X-Ray directory, unless you launched X-Ray from the EXE version.  To
-get the error report on Windows, launch X-Ray using the .BAT instead.
-Linux and OSX users will see the errors on the console X-Ray was launched
-from, as well.
+X-Ray directory.  Linux and OSX users (and Windows users who use the .BAT
+file instead of the .EXE) will see the errors on the console X-Ray was
+launched from, as well.
 
 
 RENDERING DETAILS
@@ -311,20 +310,26 @@ order:
 
   2) From the texture pack that Minecraft itself is set to use.
 
-  3) From the builtin texture that Minecraft itself uses. This might
-     be a custom texture pack if you've patched the Minecraft JAR file directly
-     with a texture pack.
+  3) From Minecraft's builtin texture pack. This could be a custom texture pack
+     if you've patched the Minecraft JAR file directly with a texture pack,
+     rather than using Minecraft's builtin texture-loading mechanisms
 
   4) From a bundled, built-in texturepack included with X-Ray itself.  This
      method should theoretically never fail, unless the X-Ray install directory
      has been modified.
 
 The override texture directory mirrors the internal structure of the
-texturepacks, but should not be a zipfile. Right now there's really only two
-files that X-Ray will end up reading from this directory: terrain.png and
-misc/water.png. So, rather than packing those inside a zipfile, just put them
-inside the "textures" directory and restart X-Ray, if you wanted to manually
-override a texture.
+texturepacks, but should not be a zipfile. Right now there are four files
+that X-Ray could end up reading from this directory:
+
+    terrain.png
+    particles.png (for the "fire" texture)
+    misc/water.png
+    art/kz.png (this is the Paintings texture file)
+
+So, rather than packing those inside a zipfile, just put them inside the
+"textures" directory and restart X-Ray, if you wanted to manually override a
+texture.
 
 Note that this *will* work for files specified in custom block definition
 files (as described above).  For instance, if you're using Aethermod and want
