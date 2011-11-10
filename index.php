@@ -24,7 +24,7 @@ application and the sourcecode, so that it could live on.</p>
 
 <p>
 Minecraft X-Ray is unrelated to the clientside mod also named
-<a href="http://www.minecraftforum.net/viewtopic.php?f=1032&t=272846">XRay</a>,
+<a href="http://www.minecraftforum.net/topic/240772-v19pre5-cjb-mods-v500pre-02-11-2011/">XRay</a> (now part of the CJB mod set),
 or to the
 <a href="http://www.minecraftforum.net/viewtopic.php?f=1021&t=171726">X-Ray Texture Packs</a>.
 </p>
