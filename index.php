@@ -162,7 +162,7 @@ find your way out if you're lost.</p>
 taken place since X-Ray 2.7, but the biggest major changes have been:
 
 <ul>
-    <li>Full support for all blocks through Beta 1.9-pre4.  This includes Nether blocks, Lapis Lazuli, Note Blocks, Beds, Trapdoors, Pistons, Huge Mushrooms, Iron Bars, Enchantment Tables, etc.</li>
+    <li>Full support for all blocks through Beta 1.9-pre5.  This includes Nether blocks, Lapis Lazuli, Note Blocks, Beds, Trapdoors, Pistons, Huge Mushrooms, Iron Bars, Enchantment Tables, etc.</li>
     <li>Blocks are loaded on-demand, and the app should handle worlds of any size.  This also results in much faster initial load times.</li>
     <li>Keybindings and resource highlight settings can be specified in a configuration file.</li>
     <li>"Explored" highlighting, which shows you where you've placed torches in underground tunnels.</li>
