@@ -42,6 +42,7 @@ $keys = array(
         array('Toggle Level Info', '` (grave accent)'),
         array('Toggle Rendering Info', 'R (on by default)'),
         array('Reload Map from Disk', '='),
+        array('Open New Map', 'O'),
         array('Show large map', 'TAB'),
         array('Release Mouse', 'ESC'),
         array('Show Keyboard Reference', 'Y'),
@@ -150,8 +151,11 @@ capable of spawning.  The equation used to calculate this was taken from
 in early October, 2011, when Beta 1.9-pre2 was out.  The equation may or
 may not be valid for
 earlier or later versions of Minecraft, but should be at least valid
-for Minecraft Beta 1.6 through Beta 1.9.  The default key to toggle this
-highlighting is "<tt>M</tt>".</p>
+for Minecraft Beta 1.6 through Minecraft 1.0.  The default key to toggle this
+highlighting is "<tt>M</tt>".  Note that in Minecraft versions prior to
+Beta 1.9-pre5, slimes would spawn only under y=16, whereas from that point
+on, slimes will spawn under y=40.  X-Ray will highlight up to y=40 for
+all maps.</p>
 
 <p>Lastly, there is an "explored" area toggle, which basically just tints
 any blocks around torches with a green color.  This makes it very easy
