@@ -32,7 +32,7 @@ up X-Ray, choose "Other..." from the world list, and browse to where
 the world directory is.  If you hear people talking about using X-Ray
 on an SMP world, it's pretty likely that they're either talking about the
 unrelated
-<a href="http://www.minecraftforum.net/viewtopic.php?f=1032&t=272846">XRay mod</a>
+<a href="http://www.minecraftforum.net/topic/240772-v19pre5-cjb-mods-v500pre-02-11-2011/">XRay mod</a>
 or the also-unrelated
 <a href="http://www.minecraftforum.net/viewtopic.php?f=1021&t=171726">X-Ray Texture Pack</a>.
 </dd>
