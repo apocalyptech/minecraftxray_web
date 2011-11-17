@@ -127,58 +127,6 @@ $resources = array(
 
 ?>
 
-<h3>Configuration File / Keymappings</h3>
-
-<blockquote>
-<p>As of Maintenance Branch 7, X-Ray will load its keymappings from a properties file,
-and as of MB8, it will load its list of highlightable resources from that config file as
-well.  The file will be created when you first start up the program.  It can be found at:
-<ul>
-<li><strong>Windows:</strong> <tt>%appdata%\.minecraft_xray\xray.properties</tt></li>
-<li><strong>OSX:</strong> <tt>~/Library/Application Support/.minecraft_xray/xray.properties</tt></li>
-<li><strong>Linux:</strong> <tt>~/.minecraft_xray/xray.properties</tt></li>
-</ul>
-The key names used should be the ones from
-<a href="http://www.lwjgl.org/javadoc/constant-values.html#org.lwjgl.input.Keyboard.KEY_1">lwjgl.org</a>, though without the <tt>KEY_</tt> prefix.  Use "<tt>NONE</tt>" to disable an action.  Note that right now only keyboard keys can
-be bound (the mouse buttons are hard-coded).  The default keybindings can be found
-on <a href="usage.php">the usage page</a>.</p>
-<p>To reset X-Ray to its default settings, simply remove the properties file.
-Eventually there might be a GUI to set these options.</p>
-</blockquote>
-
-<h3>Resource Names</h3>
-
-<blockquote>
-<p>For resources, you should use the following values in the file:</p>
-
-<table class="resourcelist">
-<tr>
-<?
-$cols = 4;
-$num_per = (int)(count($resources)/$cols);
-if (count($resources) % $cols > 0)
-{
-    $num_per += 1;
-}
-for ($i=0; $i<$cols; $i++)
-{
-    print "<td>\n";
-    for ($j=($num_per * $i); $j<($num_per * ($i+1)); $j++)
-    {
-        if ($j >= count($resources))
-        {
-            break;
-        }
-        print '<tt>' . $resources[$j] . "</tt><br>\n";
-    }
-    print "</td>\n";
-}
-?>
-</tr>
-</table>
-
-</blockquote>
-
 <h3>Overriding Textures</h3>
 
 <blockquote>
@@ -226,6 +174,60 @@ For instance, if you're using Aethermod and want
 to override the "<tt>Icestone.png</tt>" file, you'd put your own <tt>Icestone.png</tt> file into
 <tt>.minecraft_xray/textures/aether/blocks/</tt>.
 </p>
+</blockquote>
+
+<h3>Configuration File / Keymappings</h3>
+
+<blockquote>
+<p>Starting with X-Ray 3.5.0, X-Ray has a GUI to alter both keybindings and Block
+Highlighting, so there should be no need to edit its properties file by hand.  There's
+nothing preventing you from doing so, though.  The properties file will be created
+when you first start up the program.  It can be found at:
+<ul>
+<li><strong>Windows:</strong> <tt>%appdata%\.minecraft_xray\xray.properties</tt></li>
+<li><strong>OSX:</strong> <tt>~/Library/Application Support/.minecraft_xray/xray.properties</tt></li>
+<li><strong>Linux:</strong> <tt>~/.minecraft_xray/xray.properties</tt></li>
+</ul>
+The key names used should be the ones from
+<a href="http://www.lwjgl.org/javadoc/constant-values.html#org.lwjgl.input.Keyboard.KEY_1">lwjgl.org</a>, though without the <tt>KEY_</tt> prefix.  Use "<tt>NONE</tt>" to disable an action.  Note that right now only keyboard keys can
+be bound (the mouse buttons are hard-coded).  The default keybindings can be found
+on <a href="usage.php">the usage page</a>.</p>
+<p>To reset X-Ray to its default settings, simply remove the properties file.  Note that
+if you edit this file while X-Ray is running, there's a chance it might be overwritten
+by X-Ray, so if you are going to edit it by hand, do so when X-Ray is not running.</p>
+</blockquote>
+
+<h3>Resource Names</h3>
+
+<blockquote>
+<p>For resources, you should use the following values in the file:</p>
+
+<table class="resourcelist">
+<tr>
+<?
+$cols = 4;
+$num_per = (int)(count($resources)/$cols);
+if (count($resources) % $cols > 0)
+{
+    $num_per += 1;
+}
+for ($i=0; $i<$cols; $i++)
+{
+    print "<td>\n";
+    for ($j=($num_per * $i); $j<($num_per * ($i+1)); $j++)
+    {
+        if ($j >= count($resources))
+        {
+            break;
+        }
+        print '<tt>' . $resources[$j] . "</tt><br>\n";
+    }
+    print "</td>\n";
+}
+?>
+</tr>
+</table>
+
 </blockquote>
 
 <?

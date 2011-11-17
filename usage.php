@@ -45,7 +45,8 @@ $keys = array(
         array('Open New Map', 'O'),
         array('Show large map', 'TAB'),
         array('Release Mouse', 'ESC'),
-        array('Show Keyboard Reference', 'Y'),
+        array('Show/Update Key Bindings', 'Y'),
+        array('Change Block Highlights', '] (right bracket)'),
         array('Quit', 'CTRL-Q'),
     ),
 );
