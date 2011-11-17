@@ -9,7 +9,9 @@ $shots = array(
     'xray_explored' => '"Explored" Highlighting',
     'xray_ores_and_slime' => 'Ore Toggles',
     'xray_nether' => 'The Nether',
-    'xray_chasm' => 'Chasm'
+    'xray_chasm' => 'Chasm',
+    'xray_key_binding' => 'Keybinding Dialog',
+    'xray_block_highlight' => 'Block Highlight Dialog',
 );
 
 ?>
@@ -28,8 +30,19 @@ foreach ($shots as $basefile => $desc)
         print "<tr>\n";
     }
     print "<td>\n";
-    printf('<a href="%s"><img src="%s" border="0" alt="%s"></a><br>',
-        $basefile . '.png', $basefile . '_thumb.png', htmlentities($desc));
+
+    $fullfile = sprintf('%s.png', $basefile);
+    $thumbfile = sprintf('%s_thumb.png', $basefile);
+    if (file_exists($thumbfile))
+    {
+        printf('<a href="%s"><img src="%s" border="0" alt="%s"></a><br>',
+            $fullfile, $thumbfile, htmlentities($desc));
+    }
+    else
+    {
+        printf('<img src="%s" border="0" alt="%s"><br>',
+            $fullfile, htmlentities($desc));
+    }
     printf("%s\n", $desc);
     print "</td>\n";
     if ($i % $shots_per_row == $shots_per_row - 1)
