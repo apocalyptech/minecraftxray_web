@@ -193,6 +193,12 @@ of thanks for releasing the sourcecode as well.</p>
 <p>Minecraft X-Ray is released under the <a href="COPYING.txt">New/Modified BSD License</a>.</p>
 </blockquote>
 
+<h3>Shameless Advertising</h3>
+<blockquote>
+<p><a href="http://sourceforge.net/donate/index.php?group_id=398856"><img src="project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a></p>
+<p>Have too much money?  I could help you with that, if you want!</p>
+</blockquote>
+
 <?
 xray_footer();
 ?>
