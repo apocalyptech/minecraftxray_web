@@ -22,6 +22,9 @@ list of changes since X-Ray 2.7.  X-Ray uses various third-party libraries
 for other tasks.  See COPYING.txt for details on their licensing, and
 COPYING-*.txt for copies of the licenses themselves.
 
+X-Ray includes code kindly provided by Eleazar Vega-Gonzalez and Saxon Parker.
+Thanks a bunch!
+
 See TODO.txt for a list of known bugs and things that I'd like to
 implement, and BUILDING.txt if you wanted some info on building the project
 yourself.
@@ -45,73 +48,6 @@ minecraft_xray.exe or minecraft_xray.bat.
 
 Linux and OSX users should be able to doubleclick on either minecraft_xray.sh
 or minecraft_xray_osx.command (the files are actually identical).
-
-PROPERTIES FILE
----------------
-
-When X-Ray starts up for the first time, it will write out a properties file
-which you can edit if you want to change the keybindings or which resources
-are available for highlighting.  This will be installed essentially right
-alongside the ".minecraft" directory that Minecraft itself uses.
-
-File locations:
-
-    Windows: %appdata%\.minecraft_xray\xray.properties
-    OSX: ~/Library/Application Support/.minecraft_xray/xray.properties
-    Linux: ~/.minecraft_xray/xray.properties 
-
-This is just a text file, and the format should be fairly obvious.  For the
-keyboard mappings, you should use the key names found at the LWJGL site:
-
-    http://www.lwjgl.org/javadoc/constant-values.html#org.lwjgl.input.Keyboard.KEY_1
-
-But without the "KEY_" prefix.
-
-You can also set which resources you want to be highlightable in the app.
-For specifying resource highlights, you should use the following names:
-
-    BED                     GRAVEL                   REDSTONE_REPEATER_ON
-    BEDROCK                 HUGE_BROWN_MUSHROOM      REDSTONE_TORCH_OFF
-    BOOKSHELF               HUGE_RED_MUSHROOM        REDSTONE_TORCH_ON
-    BREWING_STAND           ICE                      REDSTONE_WIRE
-    BRICK                   IRON_BARS                RED_MUSHROOM
-    BRICK_STAIRS            IRON_BLOCK               RED_ROSE
-    BROWN_MUSHROOM          IRON_DOOR                SAND
-    BURNING_FURNACE         IRON_ORE                 SANDSTONE
-    CACTUS                  JACK_O_LANTERN           SAPLING
-    CAKE                    JUKEBOX                  SIGNPOST
-    CAULDRON                LADDER                   SILVERFISH
-    CHEST                   LAPIS_LAZULI_BLOCK       SLAB
-    CLAY                    LAPIS_LAZULI_ORE         SNOW
-    COAL_ORE                LAVA                     SNOW_BLOCK
-    COBBLESTONE             LEAVES                   SOUL_SAND
-    COBBLESTONE_STAIRS      LEVER                    SPONGE
-    CROPS                   LILY_PAD                 STATIONARY_LAVA
-    DEAD_SHRUB              MELON                    STATIONARY_WATER
-    DETECTOR_RAIL           MELON_STEM               STONE
-    DIAMOND_BLOCK           MINECART_TRACKS          STONE_BRICK
-    DIAMOND_ORE             MOB_SPAWNER              STONE_BRICK_STAIRS
-    DIRT                    MOSSY_COBBLESTONE        STONE_BUTTON
-    DISPENSER               MYCELIUM                 STONE_PRESSURE_PLATE
-    DOUBLE_SLAB             NETHER_BRICK             SUGARCANE
-    ENCHANTMENT_TABLE       NETHER_FENCE             TALL_GRASS
-    ENDER_PORTAL            NETHER_STAIRS            TNT
-    ENDER_PORTAL_FRAME      NETHER_WART              TORCH
-    ENDER_STONE             NETHERRACK               TRAPDOOR
-    FARMLAND                NOTE_BLOCK               VINE
-    FENCE                   OBSIDIAN                 WALL_SIGN
-    FENCE_GATE              PISTON_BODY              WATER
-    FIRE                    PISTON_HEAD              WEB
-    FURNACE                 PISTON_STICKY_BODY       WOOD
-    GLASS                   PLANK                    WOODEN_DOOR
-    GLASS_PANE              PORTAL                   WOODEN_PRESSURE_PLATE
-    GLOWING_REDSTONE_ORE    POWERED_RAIL             WOODEN_STAIRS
-    GLOWSTONE               PUMPKIN                  WOOL
-    GOLD_BLOCK              PUMPKIN_STEM             WORKBENCH
-    GOLD_ORE                REDSTONE_ORE             YELLOW_FLOWER
-    GRASS                   REDSTONE_REPEATER_OFF
-
-Perhaps someday there'll be an actual GUI for specifying all this.
 
 KEYS
 ----
@@ -159,9 +95,11 @@ overridden, though.  The default keybindings are as follows:
         Toggle Level Info:       ` (grave accent)
         Toggle Rendering Info:   R (on by default)
         Reload Map from Disk:    =
+        Open New Map:            O
         Show large map:          TAB
         Release Mouse:           ESC
         Show Keyboard Reference: Y
+        Change Block Highlights: ] (right bracket)
         Quit:                    CTRL-Q
 
 EXTRA BLOCK DEFINITIONS
@@ -192,9 +130,8 @@ it was able to load on the opening dialog.  If your file doesn't show up
 in the list, there's probably an error in it - you should be able to
 find that error in the file minecraft_xray_output_log.txt in the root
 X-Ray directory.  Linux and OSX users (and Windows users who use the .BAT
-file instead of the .EXE) will see the errors on the console X-Ray was
-launched from, as well.
-
+file instead of the .EXE) will see the errors on the console from which
+X-Ray was launched, as well.
 
 RENDERING DETAILS
 -----------------
@@ -263,8 +200,11 @@ capable of spawning.  The equation used to calculate this was taken from
 http://www.minecraftwiki.net/wiki/Slime#Spawning in early October, 2011,
 when Beta 1.9-pre2 was out.  The equation may or may not be valid for
 earlier or later versions of Minecraft, but should be at least valid
-for Minecraft Beta 1.6 through Beta 1.9.  The default key to toggle this
-highlighting is "M".
+for Minecraft Beta 1.6 through Minecraft 1.0.  The default key to toggle
+this highlighting is "M".  Note that in Minecraft versions prior to
+Beta 1.9-pre5, slimes would spawn only under y=16, whereas from that point
+on, slimes will spawn under y=40.  X-Ray will highlight up to y=40 for
+all maps.
 
 The rendering information popup can be toggled with "R" and is on by
 default.  This will let you know what these various settings are set to.
@@ -340,3 +280,18 @@ Note that this *will* work for files specified in custom block definition
 files (as described above).  For instance, if you're using Aethermod and want
 to override the "Icestone.png" file, you'd put your own Icestone.png file into
 .minecraft_xray/textures/aether/blocks/Icestone.png.
+
+PROPERTIES FILE
+---------------
+
+X-Ray keeps a properties file at the following location, essentially right alongside
+the ".minecraft" directory that Minecraft itself uses:
+
+    Windows: %appdata%\.minecraft_xray\xray.properties
+    OSX: ~/Library/Application Support/.minecraft_xray/xray.properties
+    Linux: ~/.minecraft_xray/xray.properties 
+
+As of X-Ray 3.5.0, all settings in this file can be set using the GUI, so there
+shouldn't be any reason to edit it by hand.  If you do want to edit it by hand,
+though, feel free - it's just a text file.  For some more information on the
+various constants used, see: http://apocalyptech.com/minecraft/xray/config.php

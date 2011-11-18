@@ -11,8 +11,6 @@
  
  * Draw messages on signs like you'd expect.
  
- * GUI to set custom key bindings and custom ore highlights
- 
  * Find a way to eliminate the stuttering when new map chunks are loading
  
  * Home/End will wipe the minimap and load chunks, even if we're already
@@ -33,8 +31,6 @@
    with doing things the "right way."  The code could use cleanup in general.  Also
    I think most of the files are still using DOS line-endings.
  
- * Hotkey to re-open the "Open" dialog and load a new world
- 
  * And, of course, completing the mod support - UI to select extra mod files, etc.
    "override" to explicitly override a previously-defined blocktype (this is
    technically in there already but completely untested), "version" so that people
@@ -48,7 +44,9 @@
  
  * Pull the grass colorization color from a point on misc/grasscolor.png
 
- * Snow has data, as it turns out...
+ * Snow has data, as it turns out...  Also, it would be nice to have grass+mycelium
+   react to snow properly (by changing their side image).  It seems fairly awkward to
+   pull off with YAML definitions, though, so we'll just leave it for now.
 
  * Figure out why loading in nonexistant chunks seems to glitch the app so much
 
@@ -62,4 +60,8 @@
    focus-follows-mouse type setup, but it works totally fine in both Java5 and
    Java6, so...
 
- * Slime-spawn highlighting should probably only be available in dimension 0
+ * One of these days I need to just break down and start using some GUI library
+   like TWL, rather than calling out to AWT windows.  Alas.
+
+ * It's entirely possible I should be calling .dispose() on Graphics2D objects
+   I don't need anymore, and vice-versa.  Possibly cut back on memory a bit?
