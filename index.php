@@ -36,12 +36,13 @@ or to the
 
 <strong>Current Version</strong>
 <blockquote>
-<? xray_rel('3.5.0', 'November 18, 2011'); ?>
+<? xray_rel('3.5.1', 'January 15, 2012'); ?>
 </blockquote>
 
 <img src="plus.png" id="previoustoggle" onClick="togglePrev();"> <strong onClick="togglePrev();">Previous Versions</strong>
 <div id="previous" style="display: none;">
 <blockquote>
+<? xray_rel('3.5.0', 'November 18, 2011'); ?>
 <? xray_rel('3.4.3', 'October 21, 2011'); ?>
 <? xray_rel('3.4.2', 'October 20, 2011'); ?>
 <? xray_rel('3.4.1', 'October 15, 2011'); ?>
