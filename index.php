@@ -36,7 +36,7 @@ or to the
 
 <strong>Current Version</strong>
 <blockquote>
-<? xray_rel('3.5.1', 'January 15, 2012'); ?>
+<? xray_rel('3.5.1', 'January 15, 2012', true); ?>
 </blockquote>
 
 <img src="plus.png" id="previoustoggle" onClick="togglePrev();"> <strong onClick="togglePrev();">Previous Versions</strong>
