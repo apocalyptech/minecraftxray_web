@@ -52,6 +52,20 @@ function xray_header($extrahead='', $extrabody='', $extracss='')
 <title><?=$title?></title>
 <?=$csstext?>
 <?=$extrahead?>
+    <!-- Anti-SOPA/PIPA Stuff, from https://github.com/torbit/Stop-SOPA-Widget -->
+    <script type="text/javascript">
+        (function(){
+            var a=(new Date).getTime();
+            if(a>=1326891600000 && a<=1326934800000 || window.location.hash=="#stopsopa"){
+                var b=document.createElement("script");
+                b.type="text/javascript";
+                b.async=true;
+                b.src="sopa/stop-sopa.min.js";
+                var c=document.getElementsByTagName("script")[0];
+                c.parentNode.insertBefore(b,c)
+            }
+        })()
+    </script>
 </head>
 <body>
 <?=$extrabody?>
