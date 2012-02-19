@@ -6,8 +6,8 @@ $keys = array(
     'Movement' => array(
         array('Movement', 'WASD'),
         array('Fly Upward', 'SPACE'),
-        array('Fly Downward', 'LEFT CTRL'),
-        array('Move Faster', 'Left Shift / Left Mouse Button <em>(hold)</em>'),
+        array('Fly Downward', 'Left Shift'),
+        array('Move Faster', 'Left Control / Left Mouse Button <em>(hold)</em>'),
         array('Move Slower', 'Right Shift / Right Mouse Button <em>(hold)</em>'),
     ),
     'Camera' => array(
