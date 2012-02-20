@@ -23,7 +23,7 @@ Either unzip or untar the archive, and then run the appropriate shortcut:
 </table>
 </dd>
 
-<dt>How do I load an SMP world?</dt>
+<dt>How do I load an SMP/multiplayer world?</dt>
 <dd>
 X-Ray needs to have access to the actual world directory in order to load
 a multiplayer world.  Once you have a copy of the world directory on your

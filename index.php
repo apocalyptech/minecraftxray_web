@@ -12,6 +12,10 @@ for simply exploring your Minecraft world, or finding your way out of a deep
 cave system.  It
 is distributed under the <a href="COPYING.txt">New/Modified BSD License</a>.</p>
 
+<p>In general, X-Ray is only useable on singleplayer worlds, but if you have
+access to the data files from a multiplayer server, X-Ray will load those
+from your harddrive without problems as well.</p>
+
 <p>The original X-Ray versions were written by plusminus, but has been
 maintained here since v2.7.  Many thanks to him for providing both the
 application and the sourcecode, so that it could live on.</p>
@@ -42,7 +46,7 @@ or to the
 <img src="plus.png" id="previoustoggle" onClick="togglePrev();"> <strong onClick="togglePrev();">Previous Versions</strong>
 <div id="previous" style="display: none;">
 <blockquote>
-<? xray_rel('3.5.1', 'January 15, 2012'); ?>
+<? xray_rel('3.5.1', 'January 15, 2012', true); ?>
 <? xray_rel('3.5.0', 'November 18, 2011'); ?>
 <? xray_rel('3.4.3', 'October 21, 2011'); ?>
 <? xray_rel('3.4.2', 'October 20, 2011'); ?>
@@ -153,19 +157,29 @@ or to the
 valuable ores and resources inside a Minecraft world.  By default, when you
 select a resource type to highlight, X-Ray will cause any blocks of that
 type to visibly glow within the range of loaded chunks.  The glowing can
-sometimes be a bit much, so you can also toggle the glowing on/off, which
-will still leave all instances of the selected mineral visible on the
-screen.</p>
+be toggled between two different styles, or turned off entirely.  Turning the glowing
+off will still leave all instances of the selected mineral visible on the
+screen, which can be quite useful for more plentiful minerals like iron.
+X-Ray can also be configured in the GUI to highlight any block from Minecraft, not
+just ores.</p>
 
 <p>Additionally, X-Ray is somewhat useful for taking a look at natural
 underground caves, to find out how extensive they are, or even to help
 find your way out if you're lost.</p>
 
+<p>Minecraft X-Ray operates by loading your world from the hard drive.  This means that for
+most people, X-Ray will not be useful for finding ores on multiplayer worlds, which are 
+typically stored on a server the user won't have access to.  If you do have the server data
+files, though, X-Ray will load it just fine, and even let you cycle through camera presets
+of every player on the server.</p>
+
 <p><a href="Changelog.txt">The Changelog</a> lists all the changes that have
 taken place since X-Ray 2.7, but the biggest major changes have been:
 
 <ul>
-    <li>Full support for all blocks through Minecraft 1.1.0.  This includes Nether blocks, Lapis Lazuli, Note Blocks, Beds, Trapdoors, Pistons, Huge Mushrooms, Iron Bars, Enchantment Tables, etc.</li>
+    <li>Support for the new Chunk format "<a href="http://www.mojang.com/2012/02/14/new-minecraft-map-format-anvil">Anvil</a>," which was
+        <a href="http://www.mojang.com/2012/02/15/minecraft-snapshot-12w07a/">introduced in Minecrat weekly build 12w07a</a>.</li>
+    <li>Full support for all blocks through Minecraft 1.1.0 (and the weekly builds, through 12w07a).  This includes Nether blocks, Lapis Lazuli, Note Blocks, Beds, Trapdoors, Pistons, Huge Mushrooms, Iron Bars, Enchantment Tables, Jungle blocks, Redstone Lamps, etc.</li>
     <li>Blocks are loaded on-demand, and the app should handle worlds of any size.  This also results in much faster initial load times.</li>
     <li>Keybindings and resource highlight settings can be specified in a configuration file.</li>
     <li>"Explored" highlighting, which shows you where you've placed torches in underground tunnels.</li>
