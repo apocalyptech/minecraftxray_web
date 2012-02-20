@@ -52,6 +52,7 @@
 #               GRASS (the "grass rendering" toggle uses it)
 #               SILVERFISH (the "silverfish highlighting" toggle uses it)
 #               SAPLING (some special data handling is needed)
+#               LEAVES (some special data handling is needed)
 #               PORTAL (we generate the texture to use for this one)
 #               END_PORTAL (we generate the texture to use for this one)
 #               FIRE (we generate the texture to use for this one)
@@ -281,6 +282,7 @@ blocks:
       0: [15, 0]  # Regular sapling
       1: [15, 3]  # Spruce
       2: [15, 4]  # Birch
+      3: [14, 1]  # Jungle
     type: DECORATION_CROSS
   
   - id: 7
@@ -362,6 +364,7 @@ blocks:
       0: [4, 1]   # Regular Log
       1: [4, 7]   # Spruce
       2: [5, 7]   # Birch
+      3: [9, 9]   # Jungle Tree
     tex_direction:
       TOP: [5, 1]
       BOTTOM: [5, 1]
@@ -372,7 +375,12 @@ blocks:
     mapcolor: [60, 192, 41]
     tex: [5, 3] # The "correct" one is actually [4, 3] but with the current
                 # transparency rendering issues, this one looks better.
-  
+    tex_data:
+      0: [5, 3]   # Regular
+      1: [5, 3]   # Spruce
+      2: [5, 3]   # Birch
+      3: [5, 12]  # Swamp Tree
+
   - id: 19
     idStr: SPONGE
     name: Sponge
@@ -1287,5 +1295,19 @@ blocks:
     mapcolor: [45, 1, 51]
     tex: [7, 10]
     type: DRAGON_EGG
+
+  - id: 123
+    idStr: REDSTONE_LAMP_OFF
+    name: Redstone Lamp (off)
+    mapcolor: [156, 104, 54]
+    tex: [3, 13]
+    explored: true
+
+  - id: 124
+    idStr: REDSTONE_LAMP_ON
+    name: Redstone Lamp (on)
+    mapcolor: [208, 152, 70]
+    tex: [4, 13]
+    explored: true
 
 ...

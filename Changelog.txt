@@ -1,3 +1,26 @@
+Minecraft X-Ray 3.6.0 (2012.02.20)
+
+  * Added jungle tree/leaf/sapling texture data from weekly 12w03a and 12w04a
+  * Added Redstone Lamp textures from weekly 12w07a
+  * Support for new map format "Anvil" from weekly 12w07a
+  * Support for new door data format from weekly 12w06a (though it will only
+    actually be enabled for levels saved in Anvil format)
+  * Added a few further-away lighting level presets
+  * Fixed the camera position reporting, and some chunk highlighting issues
+  * Report world position as floats instead of ints
+  * Fixed a bug where next/prev camera presets could trigger a crash after
+    warping to a different dimension
+  * Default keys for "Move Faster" (previously Left Shift) and "Move Down"
+    (previously Left Control) have been swapped, to better match the default
+    Minecraft up/down keys (while flying in a Creative map)
+  * The Ore Highlight Distance slider hasn't actually worked correctly since
+    X-Ray 3.4.0.  That's been fixed.
+  * The render distance wasn't being loaded properly from the saved state
+    from the last run.  That's fixed now too.
+  * Bundle the official Minecraft texturepack for use as a fallback, rather
+    than a third-party pack.
+  * (internal) update to LWJGL 2.8.3
+
 Minecraft X-Ray 3.5.1 (2012.01.15)
 
   * "Other" option on world-opening dialog should work more than once
