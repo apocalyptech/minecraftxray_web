@@ -53,16 +53,23 @@ $keys = array(
 );
 ?>
 
-<h3>Running</h3>
+<h3>Installing / Running</h3>
 
 <blockquote>
-<p>There isn't an installer for this currently.
+<p>Minecraft X-Ray is a standalone application that's run outside of Minecraft itself.
+It is not a mod, and you will never make modifications to Minecraft's <tt>minecraft.jar</tt>
+to run X-Ray.</p>
 
-Windows users should be able to run the program by just doubleclicking on
-<tt>minecraft_xray.exe</tt> or <tt>minecraft_xray.bat</tt>.
+<p>Currently, there isn't an installer for X-Ray.  You just unzip/untar the package
+wherever you like and then run the appropriate executable:</p>
 
-Linux and OSX users should be able to doubleclick on <tt>minecraft_xray.sh</tt>
-or <tt>minecraft_xray_osx.command</tt> <em>(the files are identical as of 3.3.0)</em>.
+<ul>
+<li>Windows users should be able to run the program by just doubleclicking on
+<tt>minecraft_xray.exe</tt> or <tt>minecraft_xray.bat</tt>.</li>
+<li>Linux and OSX users should be able to doubleclick on <tt>minecraft_xray.sh</tt>
+or <tt>minecraft_xray_osx.command</tt> <em>(the files are identical as of 3.3.0)</em>.</li>
+</ul>
+
 </blockquote>
 
 <h3>Default Keys</h3>

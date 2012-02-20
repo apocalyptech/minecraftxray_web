@@ -10,7 +10,7 @@ xray_header();
 
 <dt>How do I start X-Ray?</dt>
 <dd>
-Either unzip or untar the archive, and then run the appropriate shortcut:
+See the <a href="usage.php">Usage section</a>, but either unzip or untar the archive, and then run the appropriate shortcut:
 <table style="margin-left: 2em;">
 <tr>
 <th style="text-align: right;">Windows</th>

@@ -10,7 +10,9 @@ xray_header('<script language="JavaScript" type="text/javascript" src="func.js?v
 valuable ores and resources inside a Minecraft world.  It's also very useful
 for simply exploring your Minecraft world, or finding your way out of a deep
 cave system.  It
-is distributed under the <a href="COPYING.txt">New/Modified BSD License</a>.</p>
+is distributed under the <a href="COPYING.txt">New/Modified BSD License</a>.
+X-Ray is <strong>not</strong> a mod - it is a separate program run outside
+of Minecraft itself.</p>
 
 <p>In general, X-Ray is only useable on singleplayer worlds, but if you have
 access to the data files from a multiplayer server, X-Ray will load those
