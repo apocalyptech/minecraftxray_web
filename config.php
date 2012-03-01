@@ -27,9 +27,7 @@ texture-loading mechanism.<br><br></li>
 <li>Starting with X-Ray 3.4.0, from a bundled, built-in texturepack
 included with X-Ray itself.
 This method should theoretically never fail, unless the X-Ray install
-directory has been modified.  In X-Ray 3.4.0, we're using the
-<a href="http://www.minecraftforum.net/topic/72747-">Faithful 32x32</a>
-pack, by Vattic.</li>
+directory has been modified.</li>
 </ol>
 <p>The override texture directory mirrors the internal structure of the
 texturepacks, but should <em>not</em> be a zipfile.  Right now there are
