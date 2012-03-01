@@ -180,9 +180,9 @@ of every player on the server.</p>
 taken place since X-Ray 2.7.  Some general features, though:
 
 <ul>
-    <li>Support for the new Chunk format "<a href="http://www.mojang.com/2012/02/14/new-minecraft-map-format-anvil">Anvil</a>," which was
-        <a href="http://www.mojang.com/2012/02/15/minecraft-snapshot-12w07a/">introduced in Minecrat weekly build 12w07a</a> and is
-        included in Minecraft 1.2, due for release very shortly.  X-Ray should still be able to open worlds as far back as Alpha.</li>
+    <li>Support for the new Chunk format "<a href="http://www.mojang.com/2012/02/14/new-minecraft-map-format-anvil">Anvil</a>," which was introduced in
+        <a href="http://www.mojang.com/2012/02/15/minecraft-snapshot-12w07a/">Minecrat weekly build 12w07a</a> and was
+        included in Minecraft 1.2.  X-Ray should still be able to open worlds as far back as Alpha.</li>
     <li>Full support for all blocks through Minecraft 1.2.  This includes Nether blocks, Lapis Lazuli, Note Blocks, Beds, Trapdoors, Pistons, Huge Mushrooms, Iron Bars, Enchantment Tables, Jungle blocks, Redstone Lamps, etc.</li>
     <li>Blocks are loaded on-demand, and the app should handle worlds of any size.</li>
     <li>Keybindings and resource highlight settings can be modified inside the program itself.</li>
