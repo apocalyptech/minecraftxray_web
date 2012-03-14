@@ -37,6 +37,10 @@ $keys = array(
         array('Toggle Silverfish highlighting', 'V'),
         array('Toggle Slime Chunk highlighting', 'M'),
         array('Toggle Chunk Borders', 'U'),
+        array('Toggle Distance Sphere', '/ <em>(forward slash)</em>'),
+        array('Set Sphere Center', '; <em>(semicolon)</em>'),
+        array('Enlarge Distance Sphere', '. <em>(period)</em>'),
+        array('Shrink Distance Sphere', ', <em>(comma)</em>'),
     ),
     'Other' => array(
         array('Toggle Fullscreen', 'BACKSPACE'),
@@ -165,6 +169,16 @@ highlighting is "<tt>M</tt>".  Note that in Minecraft versions prior to
 Beta 1.9-pre5, slimes would spawn only under y=16, whereas from that point
 on, slimes will spawn under y=40.  X-Ray will highlight up to y=40 for
 all maps.</p>
+
+<p>A sphere with mostly-arbitrary radius can be drawn on the map, which might
+be helpful for planning out mob grinders or the like.  To toggle the sphere
+on or off, use the forward slash key - it will default to centering around
+the current camera position the first time, but remain at that point until
+overridden.  To set a new sphere center, use the semicolon key.  The sphere
+will start out with a radius of 24.  You can increase or decrease the radius
+in 8-block increments using "comma" and "period," within the bounds of 8
+blocks and 128 blocks.  The sphere itself will be a bluish tone, and the
+center will be marked with a small reddish sphere.</p>
 
 <p>Lastly, there is an "explored" area toggle, which basically just tints
 any blocks around torches with a green color.  This makes it very easy
