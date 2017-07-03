@@ -1,6 +1,7 @@
 <?
 require_once('func.php');
-xray_header('<script language="JavaScript" type="text/javascript" src="func.js?v=9"></script>');
+$page->add_js('func.js', 9);
+$page->apoc_header();
 ?>
 
 <p><a href="screenshots.php"><img id="screenshot" border="0" style="float: right; padding-left: .5em;" src="xray_river_thumb.png"></a></p>
@@ -35,8 +36,15 @@ or to the
 <a href="http://www.minecraftforum.net/viewtopic.php?f=1021&t=171726">X-Ray Texture Packs</a>.
 </p>
 
-<h3>Download</h3>
+<h2>Download</h2>
 <blockquote>
+
+<p><strong>Note:</strong> This hasn't been updated since early 2012, and as
+such probably doesn't work with current versions of Minecraft.  The source is
+all available on github, etc, so if anyone feels like taking over 
+maintaining X-Ray, feel free to fork and send in pull requests, etc.  I
+suspect that this has probably been supplanted by other tools by now, though.
+Anyway...</p>
 
 <p><a href="Changelog.txt">Changelog</a></p>
 
@@ -45,7 +53,7 @@ or to the
 <? xray_rel('3.6.2', 'March 11, 2012', true); ?>
 </blockquote>
 
-<img src="plus.png" id="previoustoggle" onClick="togglePrev();"> <strong onClick="togglePrev();">Previous Versions</strong>
+<strong><?php $page->print_toggle('previous', 'previoustoggle', false, 'Previous Versions'); ?></strong>
 <div id="previous" style="display: none;">
 <blockquote>
 <? xray_rel('3.6.1', 'February 29, 2012', true); ?>
@@ -154,7 +162,7 @@ or to the
 
 </blockquote>
 
-<h3>About</h3>
+<h2>About</h2>
 
 <blockquote>
 <p>As mentioned above, Minecraft X-Ray is a utility whose primary purpose is to aid in finding
@@ -197,9 +205,9 @@ taken place since X-Ray 2.7.  Some general features, though:
 that I'd like to implement eventually.</p>
 </blockquote>
 
-<h3>Other</h3>
+<h2>Other</h2>
 <blockquote>
-<p>Feel free to mail me at pez@apocalyptech.com with questions, though your
+<p>Feel free to mail me at cj@apocalyptech.com with questions, though your
 questions may possibly do better in the X-Ray forum topic:</p>
 
 <blockquote><a href="http://www.minecraftforum.net/viewtopic.php?f=1022&t=119356">http://www.minecraftforum.net/viewtopic.php?f=1022&amp;t=119356</a></blockquote>
@@ -214,12 +222,6 @@ of thanks for releasing the sourcecode as well.</p>
 <p>Minecraft X-Ray is released under the <a href="COPYING.txt">New/Modified BSD License</a>.</p>
 </blockquote>
 
-<h3>Shameless Advertising</h3>
-<blockquote>
-<p><a href="http://sourceforge.net/donate/index.php?group_id=398856"><img src="project-support.jpg" width="88" height="32" border="0" alt="Support This Project" /> </a></p>
-<p>Have too much money?  I could help you with that, if you want!</p>
-</blockquote>
-
 <?
-xray_footer();
+$page->apoc_footer();
 ?>

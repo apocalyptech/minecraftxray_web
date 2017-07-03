@@ -1,9 +1,10 @@
 <?
 require_once('func.php');
-xray_header();
+$page->set_title('Configuration');
+$page->apoc_header();
 ?>
 
-<h3>Overriding Textures</h3>
+<h2>Overriding Textures</h2>
 
 <blockquote>
 <p>In general, X-Ray will attempt to use the same texture pack that Minecraft
@@ -50,7 +51,7 @@ to override the "<tt>Icestone.png</tt>" file, you'd put your own <tt>Icestone.pn
 </p>
 </blockquote>
 
-<h3>Configuration File / Keymappings</h3>
+<h2>Configuration File / Keymappings</h2>
 
 <blockquote>
 <p>Starting with X-Ray 3.5.0, X-Ray has a GUI to alter both keybindings and Block
@@ -72,5 +73,5 @@ by X-Ray, so if you are going to edit it by hand, do so when X-Ray is not runnin
 </blockquote>
 
 <?
-xray_footer();
+$page->apoc_footer();
 ?>

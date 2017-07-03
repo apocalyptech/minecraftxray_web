@@ -1,9 +1,10 @@
 <?
 require_once('func.php');
-xray_header();
+$page->set_title('Mod Support');
+$page->apoc_header();
 ?>
 
-<h3>Mod Support</h3>
+<h2>Mod Support</h2>
 
 <blockquote>
 <p>
@@ -52,7 +53,7 @@ from, as well.
 If people do start using this feature, I think it would be nice to have
 a central repository for YAML files, for various mods.  For now, if you
 complete a YAML file for a mod and want it up here, you can just
-<a href="mailto:pez@apocalyptech.com?subject=Minecraft X-Ray Block Definition Submission">email me</a>
+<a href="mailto:cj@apocalyptech.com?subject=Minecraft X-Ray Block Definition Submission">email me</a>
 with the file and I'll put it up here manually.  Eventually I might do
 something a little more fancy.
 </p>
@@ -63,5 +64,5 @@ something a little more fancy.
 </p>
 
 <?
-xray_footer();
+$page->apoc_footer();
 ?>

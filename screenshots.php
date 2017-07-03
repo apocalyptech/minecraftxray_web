@@ -1,6 +1,7 @@
 <?
 require_once('func.php');
-xray_header();
+$page->set_title('Screenshots');
+$page->apoc_header();
 
 $shots_per_row = 2;
 $shots = array(
@@ -62,5 +63,5 @@ if ($i % $shots_per_row == $shots_per_row - 1)
 </blockquote>
 
 <?
-xray_footer();
+$page->apoc_footer();
 ?>

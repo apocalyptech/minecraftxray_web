@@ -1,6 +1,7 @@
 <?
 require_once('func.php');
-xray_header();
+$page->set_title('Usage');
+$page->apoc_header();
 
 $keys = array(
     'Movement' => array(
@@ -53,7 +54,7 @@ $keys = array(
 );
 ?>
 
-<h3>Installing / Running</h3>
+<h2>Installing / Running</h2>
 
 <blockquote>
 <p>Minecraft X-Ray is a standalone application that's run outside of Minecraft itself.
@@ -72,7 +73,7 @@ or <tt>minecraft_xray_osx.command</tt> <em>(the files are identical as of 3.3.0)
 
 </blockquote>
 
-<h3>Default Keys</h3>
+<h2>Default Keys</h2>
 
 <blockquote>
 <table class="toptable">
@@ -90,7 +91,7 @@ foreach ($keys as $category => $keylist)
     }
 
     print "<td>\n";
-    print '<h4>' . $category . "</h4>\n";
+    print '<h3>' . $category . "</h3>\n";
     print "<table>\n";
     foreach ($keylist as $keyarr)
     {
@@ -112,7 +113,7 @@ if ($catcount % 2 == 1)
 </table>
 </blockquote>
 
-<h3>Rendering Details</h3>
+<h2>Rendering Details</h2>
 
 <blockquote>
 <p>There are three main "sliders" available to control how things are
@@ -179,7 +180,7 @@ default.  This will let you know what these various settings are set to.</p>
 
 </blockquote>
 
-<h3>Camera Options</h3>
+<h2>Camera Options</h2>
 
 <blockquote>
 <p>For singleplayer worlds, there will be two camera presets: the spawnpoint,
@@ -209,5 +210,5 @@ and down manually, of course.</p>
 </blockquote>
 
 <?
-xray_footer();
+$page->apoc_footer();
 ?>

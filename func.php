@@ -1,99 +1,17 @@
 <?
 
-$links = array('index.php', 'usage.php', 'config.php', 'modsupport.php', 'faq.php', 'screenshots.php');
-$link_labels = array(
-    'index.php' => 'Home',
-    'usage.php' => 'Usage',
-    'config.php' => 'Configuration',
-    'modsupport.php' => 'Mod Support',
-    'faq.php' => 'FAQ',
-    'screenshots.php' => 'Screenshots',
-);
-
-function xray_header($extrahead='', $extrabody='', $extracss='')
-{
-    global $links;
-    global $link_labels;
-
-    $main_css = 'main.css?v=2';
-
-    # Any extra CSS?
-    if (is_array($extracss))
-    {
-        array_unshift($extracss, $main_css);
-    }
-    else
-    {
-        $extracss = array($main_css);
-    }
-
-    # Figure out what page we're loading
-    $pagearr = explode('/', $_SERVER['SCRIPT_NAME']);
-    $whichpage = end($pagearr);
-    if (!array_key_exists($whichpage, $link_labels))
-    {
-        $whichpage = $links[0];
-    }
-
-    # Custom title
-    $base_title = 'Minecraft X-Ray';
-    $title = $base_title . ' | ' . $link_labels[$whichpage];
-
-    $cssarrtext = array();
-    foreach ($extracss as $css)
-    {
-        $cssarrtext[] = '<link rel="stylesheet" type="text/css" media="all" href="' . $css . '"></link>';
-    }
-    $csstext = join("\n", $cssarrtext);
-
-	?>
-<html>
-<head>
-<title><?=$title?></title>
-<?=$csstext?>
-<?=$extrahead?>
-    <!-- Anti-SOPA/PIPA Stuff, from https://github.com/torbit/Stop-SOPA-Widget -->
-    <script type="text/javascript">
-        (function(){
-            var a=(new Date).getTime();
-            if(a>=1326891600000 && a<=1326934800000 || window.location.hash=="#stopsopa"){
-                var b=document.createElement("script");
-                b.type="text/javascript";
-                b.async=true;
-                b.src="sopa/stop-sopa.min.js";
-                var c=document.getElementsByTagName("script")[0];
-                c.parentNode.insertBefore(b,c)
-            }
-        })()
-    </script>
-</head>
-<body>
-<?=$extrabody?>
-<div class="header">
-<h2><?=$base_title?></h2>
-<div class="navigation">
-	<?
-    $linkarr = array();
-    foreach ($links as $link)
-    {
-        if ($link == $whichpage)
-        {
-            $linkarr[] = '<span class="section">' . $link_labels[$link] . '</span>';
-        }
-        else
-        {
-            $linkarr[] = '<span class="section"><a href="' . $link . '">' . $link_labels[$link] . '</a></span>';
-        }
-    }
-    print implode(" |\n ", $linkarr) . "\n";
-    print "</div>\n";
-    print "</div>\n";
-}
-
-function xray_footer()
-{
-	print '</body></html>';
-}
+require_once('../inc/apoc.php');
+$page->set_base_title('Minecraft X-Ray');
+$page->use_base_title_in_page_only = true;
+$page->set_app_menu(new MenuItem('/minecraft-xray/', 'Root', array(
+    new MenuItem(NULL, 'Home'),
+    new MenuItem('usage.php', 'Usage'),
+    new MenuItem('config.php', 'Configuration'),
+    new MenuItem('modsupport.php', 'Mod Support'),
+    new MenuItem('faq.php', 'FAQ'),
+    new MenuItem('screenshots.php', 'Screenshots'),
+)));
+$page->add_css('main.css', 2);
 
 function xray_rel($ver, $date, $tgz=false)
 {

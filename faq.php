@@ -1,9 +1,10 @@
 <?
 require_once('func.php');
-xray_header();
+$page->set_title('FAQ');
+$page->apoc_header();
 ?>
 
-<h3>Frequently Asked Questions</h3>
+<h2>Frequently Asked Questions</h2>
 
 <blockquote>
 <dl>
@@ -53,7 +54,7 @@ If there's an error, X-Ray should report it to you in a popup window.
 You could report that error (with the full text of the Exception shown)
 either
 <a href="http://www.minecraftforum.net/viewtopic.php?f=1022&t=119356">in the forums</a> or
-<a href="https://sourceforge.net/tracker/?group_id=398856&atid=1654251">at the bug tracker</a>, or mail me at pez@apocalyptech.com.  Additionally, X-Ray
+<a href="https://sourceforge.net/tracker/?group_id=398856&atid=1654251">at the bug tracker</a>, or mail me at cj@apocalyptech.com.  Additionally, X-Ray
 should generate a file called "<tt>minecraft_xray_output_log.txt</tt>" in
 the main directory where X-Ray is contained.  That file may contain useful
 information to include in the bug report as well.
@@ -93,5 +94,5 @@ yourself, please let me know what happens!
 </blockquote>
 
 <?
-xray_footer();
+$page->apoc_footer();
 ?>
